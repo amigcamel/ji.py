@@ -90,7 +90,7 @@ class DelListElementPopQuiz(Quiz):
 
     def judge(self, snippet) -> bool:
         for j in (
-            self.local['x'] == self.answer,
+            self.local['x'] = self.answer,
         ):
             if not j:
                 return False

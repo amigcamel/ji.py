@@ -11,6 +11,7 @@ from tkinter import (
     Text,
     messagebox,
     END,
+    N, S, W, E,
 )
 
 import quiz
@@ -21,10 +22,14 @@ class Window(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.master = master
+
         self.quizzes = self.collect_quizzes()
         self.total_quiz_num = len(self.quizzes)
         self.quiz = self.quizzes[0]()
         self.init_window()
+
+        # Key bindings
+        self.bind('<M1-E>', self.quit)
 
     def gen_quiz(self):
         if not self.quizzes:
@@ -53,6 +58,8 @@ class Window(Frame):
     def init_window(self):
         self.master.title('吉.py')
         self.pack(fill=BOTH, expand=1, padx=10, pady=10)
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
 
         # menu
         menu = Menu(self.master)
@@ -67,14 +74,14 @@ class Window(Frame):
         menu.add_cascade(label='關於', menu=edit)
 
         self.title = Label(self, text=f'已完成練習題數: {self.chanllenge_status}')
-        self.title.grid(row=0, column=0, padx=10, pady=10)
+        self.title.grid(row=0, column=0)
 
         question = Label(self, text=self.quiz.description)
         question.grid(row=1, column=0)
 
-        self.snippet = Text(self, height=10, width=80,
+        self.snippet = Text(self, 
                             highlightbackground='#D1D0CE')
-        self.snippet.grid(row=2, column=0, columnspan=2)
+        self.snippet.grid(row=2, column=0, columnspan=2, sticky=N+S+W+E)
 
         self.submit_button = Button(
             self, text='送出', command=self.submit, width=40)
@@ -137,6 +144,6 @@ if __name__ == '__main__':
 
     # Positions the window in the center of the page.
     root.geometry("+{}+{}".format(position_right, position_down))
-
+    root.minsize(600, 500)
     app = Window(root)
     root.mainloop()
