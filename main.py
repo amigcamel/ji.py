@@ -1,3 +1,6 @@
+import inspect
+import random
+
 from tkinter import (
     Frame,
     Tk,
@@ -10,7 +13,7 @@ from tkinter import (
     END,
 )
 
-from quiz import FixTypoQuiz
+import quiz
 
 
 class Window(Frame):
@@ -18,13 +21,38 @@ class Window(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.master = master
+        self.quizzes = self.collect_quizzes()
+        self.total_quiz_num = len(self.quizzes)
+        self.quiz = self.quizzes[0]()
         self.init_window()
+
+    def gen_quiz(self):
+        if not self.quizzes:
+            return f'已完成練習題數: {left}/{self.total_quiz_num}'
+            return
+        self.quiz = self.quizzes[0]()
+        self.snippet.delete('1.0', END)
+        self.snippet.insert(END, self.quiz.init_text)
+        self.title['text'] = f'已完成練習題數: {self.chanllenge_status}'
+
+    def collect_quizzes(self):
+        quizzes = []
+        for name, obj in inspect.getmembers(quiz):
+            if inspect.isclass(obj):
+                mro = obj.mro()
+                if mro[1] == quiz.Quiz:
+                    quizzes.append(obj)
+        random.shuffle(quizzes)
+        return quizzes
+
+    @property
+    def chanllenge_status(self):
+        left = self.total_quiz_num - len(self.quizzes)
+        return f'已完成練習題數: {left}/{self.total_quiz_num}'
 
     def init_window(self):
         self.master.title('吉.py')
         self.pack(fill=BOTH, expand=1, padx=10, pady=10)
-
-        self.quiz = FixTypoQuiz()
 
         # menu
         menu = Menu(self.master)
@@ -38,8 +66,8 @@ class Window(Frame):
         edit.add_command(label='這是什麼', command=self.about)
         menu.add_cascade(label='關於', menu=edit)
 
-        title = Label(self, text='已完成練習題數: 1/10')
-        title.grid(row=0, column=0, padx=10, pady=10)
+        self.title = Label(self, text=f'已完成練習題數: {self.chanllenge_status}')
+        self.title.grid(row=0, column=0, padx=10, pady=10)
 
         question = Label(self, text=self.quiz.description)
         question.grid(row=1, column=0)
@@ -73,14 +101,17 @@ class Window(Frame):
             messagebox.showwarning('', '答案或方法錯誤')
         elif status == 1:
             messagebox.showinfo('水喔', '好棒棒!')
+            if len(self.quizzes) == 1:
+                self.title['text'] = '全部練習完畢囉～' 
+            else:
+                del self.quizzes[0]
+                self.gen_quiz()
 
     def reset(self):
         ans = messagebox.askquestion(
             '確定重設?', '當前編輯將被清空', icon='warning')
         if ans == 'yes':
-            self.quiz = FixTypoQuiz()
-            self.snippet.delete('1.0', END)
-            self.snippet.insert(END, self.quiz.init_text)
+            self.gen_quiz()
 
     def hint(self):
         ans = messagebox.askquestion(
@@ -107,6 +138,5 @@ if __name__ == '__main__':
     # Positions the window in the center of the page.
     root.geometry("+{}+{}".format(position_right, position_down))
 
-    root.iconbitmap('./wm.ico')
     app = Window(root)
     root.mainloop()

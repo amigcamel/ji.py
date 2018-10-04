@@ -80,7 +80,18 @@ class FixTypoQuiz(Quiz):
         return True
 
 
-class ListPopQuiz(Quiz):
+class DelListElementPopQuiz(Quiz):
 
-    def judge():
-        pass
+    name = 'Delete list element'
+    description = '刪除 "x" 之最後一個元素'
+    hint = 'del'
+    local = {'x': ['a', 'b', 'c', 'd', 'x']}
+    answer = ['a', 'b', 'c', 'd']
+
+    def judge(self, snippet) -> bool:
+        for j in (
+            self.local['x'] == self.answer,
+        ):
+            if not j:
+                return False
+        return True
