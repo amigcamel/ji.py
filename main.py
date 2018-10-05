@@ -133,7 +133,7 @@ class Window(Frame):
         messagebox.showinfo('阿吉關心您', '只要有心，人人都是py神')
 
 
-if __name__ == '__main__':
+def run_app():
     root = Tk()
 
     window_width = root.winfo_reqwidth()
@@ -147,3 +147,7 @@ if __name__ == '__main__':
     root.minsize(600, 500)
     app = Window(root)
     root.mainloop()
+
+
+if __name__ == '__main__':
+    run_app()
