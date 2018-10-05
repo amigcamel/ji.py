@@ -1,9 +1,11 @@
+"""Tests for quiz."""
 from core.quiz import Quiz
 
 import pytest
 
 
 def test_abc():
+    """Test Base class Quiz."""
     with pytest.raises(TypeError) as e:
         class TestQuiz(Quiz):
             pass

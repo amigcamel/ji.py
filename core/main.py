@@ -1,3 +1,4 @@
+"""Main app settings."""
 # -*- coding: utf-8 -*-
 import inspect
 import random
@@ -18,9 +19,9 @@ from tkinter import (
 from . import quiz
 
 
-class Window(Frame):
+class Window(Frame):  # noqa: D101
 
-    def __init__(self, master=None):
+    def __init__(self, master=None):  # noqa: D107
         Frame.__init__(self, master)
         self.master = master
 
@@ -33,14 +34,14 @@ class Window(Frame):
         self.bind('<M1-E>', self.quit)
 
     def gen_quiz(self):
-        if not self.quizzes:
-            return f'已完成練習題數: {left}/{self.total_quiz_num}'
+        """Generate quiz."""
         self.quiz = self.quizzes[0]()
         self.snippet.delete('1.0', END)
         self.snippet.insert(END, self.quiz.init_text)
         self.title['text'] = self.chanllenge_status
 
     def collect_quizzes(self):
+        """Dynamically collect class inherited from quiz.Quiz."""
         quizzes = []
         for name, obj in inspect.getmembers(quiz):
             if inspect.isclass(obj):
@@ -52,10 +53,12 @@ class Window(Frame):
 
     @property
     def chanllenge_status(self):
+        """Return chanllenge status."""
         left = self.total_quiz_num - len(self.quizzes)
         return f'已完成練習題數: {left}/{self.total_quiz_num}'
 
     def init_window(self):
+        """Initalize window."""
         self.master.title('吉.py')
         self.pack(fill=BOTH, expand=1, padx=10, pady=10)
         self.grid_rowconfigure(0, weight=1)
@@ -74,14 +77,13 @@ class Window(Frame):
         menu.add_cascade(label='關於', menu=edit)
 
         self.title = Label(self, text=self.chanllenge_status)
-        self.title.grid(row=0, column=1, columnspan=2, sticky=N+E)
+        self.title.grid(row=0, column=1, columnspan=2, sticky=N + E)
 
         question = Label(self, text=self.quiz.description)
         question.grid(row=1, column=0, sticky=N)
 
-        self.snippet = Text(self, 
-                            highlightbackground='#D1D0CE')
-        self.snippet.grid(row=2, column=0, columnspan=2, sticky=N+S+W+E)
+        self.snippet = Text(self, highlightbackground='#D1D0CE')
+        self.snippet.grid(row=2, column=0, columnspan=2, sticky=N + S + W + E)
 
         self.submit_button = Button(
             self, text='送出', command=self.submit, width=40)
@@ -98,6 +100,7 @@ class Window(Frame):
         self.snippet.insert(END, self.quiz.init_text)
 
     def submit(self):
+        """Submite snippet."""
         snippet = self.snippet.get('1.0', END)
         status, message = self.quiz(snippet)
         if status == -2:
@@ -109,43 +112,47 @@ class Window(Frame):
         elif status == 1:
             messagebox.showinfo('水喔', '好棒棒!')
             if len(self.quizzes) == 1:
-                self.title['text'] = '全部練習完畢囉～' 
+                self.title['text'] = '全部練習完畢囉～'
             else:
                 del self.quizzes[0]
                 self.gen_quiz()
 
     def reset(self):
+        """Reset initial text."""
         ans = messagebox.askquestion(
             '確定重設?', '當前編輯將被清空', icon='warning')
         if ans == 'yes':
             self.gen_quiz()
 
     def hint(self):
+        """Provide hint."""
         ans = messagebox.askquestion(
             '真的不再想一下嗎?', '確定要提示?', icon='warning')
         if ans == 'yes':
             messagebox.showinfo('提示', self.quiz.hint)
 
     def quit(self):
+        """Quit app."""
         exit()
 
     def about(self):
+        """Show about info."""
         messagebox.showinfo('阿吉關心您', '只要有心，人人都是py神')
 
 
 def run_app():
+    """Run this app."""
     root = Tk()
 
     window_width = root.winfo_reqwidth()
     window_height = root.winfo_reqheight()
 
-    position_right = int(root.winfo_screenwidth()/2 - window_width/2)
-    position_down = int(root.winfo_screenheight()/2 - window_height/2)
+    position_right = int(root.winfo_screenwidth() / 2 - window_width / 2)
+    position_down = int(root.winfo_screenheight() / 2 - window_height / 2)
 
     # Positions the window in the center of the page.
     root.geometry("+{}+{}".format(position_right, position_down))
     root.minsize(600, 500)
-    app = Window(root)
     root.mainloop()
 
 
