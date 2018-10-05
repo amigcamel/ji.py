@@ -7,6 +7,9 @@ class Quiz(abc.ABC):
 
     hint = None
 
+    def __init__(self):
+        self.local = self.presets.copy()
+
     def __repr__(self, *args, **kwargs):
         return f'<Quiz: {self.name}>'
 
@@ -22,7 +25,7 @@ class Quiz(abc.ABC):
 
     @property
     @abc.abstractproperty
-    def local(self):
+    def presets(self):
         raise NotImplemented
 
     @property
@@ -65,7 +68,7 @@ class FixTypoQuiz(Quiz):
     )
     hint = 'str.replace'
 
-    local = {
+    presets = {
         'sentence': 'I love Pyton',
     }
 
@@ -86,7 +89,7 @@ class DelListElementPopQuiz(Quiz):
     name = 'Delete list element'
     description = '刪除 "x" 之最後一個元素'
     hint = 'del'
-    local = {'x': ['a', 'b', 'c', 'd', 'x']}
+    presets = {'x': ['a', 'b', 'c', 'd', 'x']}
     answer = ['a', 'b', 'c', 'd']
 
     def judge(self, snippet) -> bool:

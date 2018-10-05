@@ -10,6 +10,6 @@ def test_abc():
         TestQuiz()
     message = (
         "Can't instantiate abstract class TestQuiz with abstract methods "
-        'answer, description, judge, local, name'  # sorted alphabetically
+        'answer, description, judge, presets, name'  # sorted alphabetically
     )
     assert e.value.args[0] == message
