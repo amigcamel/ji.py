@@ -76,13 +76,19 @@ class Window(Frame):  # noqa: D101
         edit.add_command(label='這是什麼', command=self.about)
         menu.add_cascade(label='關於', menu=edit)
 
-        self.title = Label(self, text=self.chanllenge_status)
+        self.title = Label(
+            self, text=self.chanllenge_status, font=('Helvetica', 10))
         self.title.grid(row=0, column=1, columnspan=2, sticky=N + E)
 
-        question = Label(self, text=self.quiz.description)
+        question = Label(
+            self, text=self.quiz.description, font=('Helvetica', 14, 'bold'))
         question.grid(row=1, column=0, sticky=N)
 
-        self.snippet = Text(self, highlightbackground='#D1D0CE')
+        self.snippet = Text(
+            self,
+            highlightbackground='#D1D0CE',
+            font=('Courier New', 12),
+        )
         self.snippet.grid(row=2, column=0, columnspan=2, sticky=N + S + W + E)
 
         self.submit_button = Button(
