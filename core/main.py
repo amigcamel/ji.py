@@ -84,32 +84,31 @@ class Window(Frame):  # noqa: D101
         edit.add_command(label='這是什麼', command=self.about)
         menu.add_cascade(label='關於', menu=edit)
 
-        self.title = Label(
-            self, text=self.chanllenge_status, font=('Helvetica', 10))
-        self.title.grid(row=0, column=1, columnspan=2, sticky=N + E)
-
         self.question = Label(
             self, text=self.quiz.description, font=('Helvetica', 14, 'bold'))
-        self.question.grid(row=1, column=0, sticky=N)
+        self.question.grid(row=1, column=0, sticky=N + W, pady=10)
 
         self.snippet = Text(
             self,
             highlightbackground='#D1D0CE',
-            font=('Courier New', 12),
+            font=('Courier New', 14),
         )
-        self.snippet.grid(row=2, column=0, columnspan=2, sticky=N + S + W + E)
+        self.snippet.grid(row=0, column=0, columnspan=2, sticky=N + S + W + E)
 
-        self.submit_button = Button(
-            self, text='送出', command=self.submit, width=40)
-        self.submit_button.grid(row=3, column=0, rowspan=2)
+        self.submit_button = Button(self, text='送出', command=self.submit)
+        self.submit_button.grid(row=2, column=0, sticky=W + E)
+
+        self.title = Label(
+            self, text=self.chanllenge_status, font=('Helvetica', 10))
+        self.title.grid(row=3, column=0, columnspan=2, sticky=W)
 
         self.hint_button = Button(
-            self, text='提示', command=self.hint, width=10)
-        self.hint_button.grid(row=3, column=1)
+            self, text='提示', command=self.hint, width=15)
+        self.hint_button.grid(row=2, column=1)
 
         self.reset_button = Button(
-            self, text='重設', command=self.reset, width=10)
-        self.reset_button.grid(row=4, column=1)
+            self, text='重設', command=self.reset, width=15)
+        self.reset_button.grid(row=3, column=1)
 
         self.snippet.insert(END, self.quiz.init_text)
 
