@@ -78,7 +78,7 @@ class Window(Frame):
         self.title.grid(row=0, column=1, columnspan=2, sticky=N+E)
 
         question = Label(self, text=self.quiz.description)
-        # question.grid(row=1, column=0, sticky=N)
+        question.grid(row=1, column=0, sticky=N)
 
         self.snippet = Text(self, 
                             highlightbackground='#D1D0CE')
