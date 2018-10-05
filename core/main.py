@@ -139,10 +139,7 @@ class Window(Frame):  # noqa: D101
 
     def hint(self):
         """Provide hint."""
-        ans = messagebox.askquestion(
-            '真的不再想一下嗎?', '確定要提示?', icon='warning')
-        if ans == 'yes':
-            messagebox.showinfo('提示', self.quiz.hint)
+        messagebox.showinfo('提示', self.quiz.hint)
 
     def quit(self):
         """Quit app."""
