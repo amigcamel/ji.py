@@ -39,6 +39,7 @@ class Window(Frame):  # noqa: D101
         self.snippet.delete('1.0', END)
         self.snippet.insert(END, self.quiz.init_text)
         self.title['text'] = self.chanllenge_status
+        self.question['text'] = self.quiz.description
 
     def collect_quizzes(self):
         """Dynamically collect class inherited from quiz.Quiz."""
@@ -80,9 +81,9 @@ class Window(Frame):  # noqa: D101
             self, text=self.chanllenge_status, font=('Helvetica', 10))
         self.title.grid(row=0, column=1, columnspan=2, sticky=N + E)
 
-        question = Label(
+        self.question = Label(
             self, text=self.quiz.description, font=('Helvetica', 14, 'bold'))
-        question.grid(row=1, column=0, sticky=N)
+        self.question.grid(row=1, column=0, sticky=N)
 
         self.snippet = Text(
             self,
