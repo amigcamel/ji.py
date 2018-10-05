@@ -68,11 +68,11 @@ class Window(Frame):  # noqa: D101
         menu = Menu(self.master)
         self.master.config(menu=menu)
 
-        file = Menu(menu)
-        file.add_command(label='Exit', command=self.quit)
-        menu.add_cascade(label='File', menu=file)
+        file = Menu(menu, tearoff=0)
+        file.add_command(label='離開', command=self.quit)
+        menu.add_cascade(label='檔案', menu=file)
 
-        edit = Menu(menu)
+        edit = Menu(menu, tearoff=0)
         edit.add_command(label='這是什麼', command=self.about)
         menu.add_cascade(label='關於', menu=edit)
 
