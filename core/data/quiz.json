@@ -1,0 +1,15 @@
+{
+  "CountLetter": {
+    "name": "count letter",
+    "description": "Count letter",
+    "presets": { 
+      "word": "linguistics",
+      "ans": null
+    },
+    "hint": "str.count",
+    "answer": 3,
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ]
+  }
+}
