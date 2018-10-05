@@ -153,6 +153,7 @@ def run_app():
     # Positions the window in the center of the page.
     root.geometry("+{}+{}".format(position_right, position_down))
     root.minsize(600, 500)
+    Window(root)
     root.mainloop()
 
 
