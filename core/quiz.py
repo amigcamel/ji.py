@@ -68,35 +68,3 @@ class Quiz(abc.ABC):
             return (1, 'Correct answer')
         except Exception as err:
             return (-1, err)
-
-
-class FixTypoQuiz(Quiz):  # noqa: D101
-
-    name = 'Fix typo'
-    description = (
-        'sentence 裡面有一個錯字"Pyton"，'
-        '請把它取代為"Python"'
-    )
-    hint = 'str.replace'
-
-    presets = {
-        'sentence': 'I love Pyton',
-    }
-
-    answer = 'I love Python'
-    criteria = (
-        "self.local['sentence'] == self.answer",
-        "'.replace' in snippet",
-    )
-
-
-class DelListElementQuiz(Quiz):  # noqa: D101
-
-    name = 'Delete list element'
-    description = '刪除 "x" 之最後一個元素'
-    hint = 'del'
-    presets = {'x': ['a', 'b', 'c', 'd', 'x']}
-    answer = ['a', 'b', 'c', 'd']
-    criteria = (
-        "self.local['x'] == self.answer",
-    )
