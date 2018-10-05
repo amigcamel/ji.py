@@ -1,10 +1,5 @@
 """Main app settings."""
 # -*- coding: utf-8 -*-
-import json
-import random
-import os
-from os.path import abspath, dirname, join
-
 from tkinter import (
     Frame,
     Tk,
@@ -27,7 +22,7 @@ class Window(Frame):  # noqa: D101
         Frame.__init__(self, master)
         self.master = master
 
-        self.quizzes = self.collect_quizzes()
+        self.quizzes = quiz.collect_quizzes()
         self.total_quiz_num = len(self.quizzes)
         self.quiz = self.quizzes[0]()
         self.init_window()
@@ -42,21 +37,6 @@ class Window(Frame):  # noqa: D101
         self.snippet.insert(END, self.quiz.init_text)
         self.title['text'] = self.chanllenge_status
         self.question['text'] = self.quiz.description
-
-    def collect_quizzes(self):
-        """Dynamically collect class inherited from quiz.Quiz."""
-        quizzes = []
-        data_path = join(dirname(abspath(__file__)), 'data')
-        for _, _, filenames in os.walk(data_path):
-            for filename in filenames:
-                if filename.endswith('.json'):
-                    with open(join(data_path, filename)) as f:
-                        data = json.load(f)
-                    for class_name, settings in data.items():
-                        quizzes.append(
-                            type(class_name, (quiz.Quiz, ), settings))
-        random.shuffle(quizzes)
-        return quizzes
 
     @property
     def chanllenge_status(self):
@@ -149,7 +129,7 @@ class Window(Frame):  # noqa: D101
 
     def hint(self):
         """Provide hint."""
-        messagebox.showinfo('提示', self.quiz.hint)
+        messagebox.showinfo('提示', self.quiz.hint or '沒有提示')
 
     def quit(self):
         """Quit app."""

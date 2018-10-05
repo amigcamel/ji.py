@@ -2,13 +2,12 @@
   "FixTypo": {
     "name": "字串取代",
     "description": "sentence 裡面有一個錯字 Pyton，請把它取代為 Python",
-    "hint": "str.replace",
     "presets": {
       "sentence": "I love Pyton"
     },
     "answer": "I love Python",
     "criteria": [
-      "self.local['sentence'] == self.answer",
+      "self.local.get('sentence') == self.answer",
       "'.replace' in snippet"
     ] 
   },
@@ -23,6 +22,18 @@
     "answer": 2,
     "criteria": [
       "self.local.get('ans') == self.answer"
+    ]
+  },
+  "StripString": {
+    "name": "修剪字串",
+    "description": "去除字首字尾多餘的空白",
+    "presets": {
+      "sentence": "  有些人喜歡，有些人不喜歡，因為他有一種哈味      "
+    },
+    "hint": "str.strip",
+    "answer": "有些人喜歡，有些人不喜歡，因為他有一種哈味",
+    "criteria": [
+      "self.local.get('sentence') == self.answer"
     ]
   }
 }
