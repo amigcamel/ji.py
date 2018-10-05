@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import inspect
 import random
 
@@ -14,7 +15,7 @@ from tkinter import (
     N, S, W, E,
 )
 
-import quiz
+from . import quiz
 
 
 class Window(Frame):
