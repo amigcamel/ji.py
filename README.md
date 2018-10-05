@@ -12,3 +12,8 @@
 Or, clone this repo and run:
 
     $ python -c 'from core.main import run_app; run_app()'
+
+
+## Test
+
+    tox
