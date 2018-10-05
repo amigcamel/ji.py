@@ -84,7 +84,7 @@ class FixTypoQuiz(Quiz):
         return True
 
 
-class DelListElementPopQuiz(Quiz):
+class DelListElementQuiz(Quiz):
 
     name = 'Delete list element'
     description = '刪除 "x" 之最後一個元素'

@@ -35,7 +35,6 @@ class Window(Frame):
     def gen_quiz(self):
         if not self.quizzes:
             return f'已完成練習題數: {left}/{self.total_quiz_num}'
-            return
         self.quiz = self.quizzes[0]()
         self.snippet.delete('1.0', END)
         self.snippet.insert(END, self.quiz.init_text)
