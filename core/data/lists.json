@@ -8,10 +8,27 @@
     },
     "answer": ["a", "b", "c", "d"],
     "criteria": [
-        "self.local['x'] == self.answer"
+        "self.local.get('x') == self.answer"
     ],
     "test_code": [
       "del x[-1]"
     ]
+  },
+  "ExtractElement": {
+    "name": "取出元素",
+    "description": "取出 x 之第 2 個元素",
+    "hint": "list[num]",
+    "presets": {
+      "x": ["臺", "大", "語", "言", "所"],
+      "ans": null
+    },
+    "answer": "大",
+    "criteria": [
+        "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = x[1]"
+    ]
   }
+
 }
