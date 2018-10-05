@@ -85,29 +85,34 @@ class Window(Frame):  # noqa: D101
 
         self.question = Label(
             self, text=self.quiz.description, font=('Helvetica', 14, 'bold'))
-        self.question.grid(row=1, column=0, sticky=N + W, pady=10)
+        self.question.grid(
+            row=1, column=0, columnspan=4, sticky=N + W, pady=10)
 
         self.snippet = Text(
             self,
             highlightbackground='#D1D0CE',
             font=('Courier New', 14),
         )
-        self.snippet.grid(row=0, column=0, columnspan=2, sticky=N + S + W + E)
+        self.snippet.grid(row=0, column=0, columnspan=4, sticky=N + S + W + E)
 
         self.submit_button = Button(self, text='送出', command=self.submit)
-        self.submit_button.grid(row=2, column=0, sticky=W + E)
+        self.submit_button.grid(row=2, column=0, columnspan=4, sticky=W + E)
 
         self.title = Label(
             self, text=self.chanllenge_status, font=('Helvetica', 10))
-        self.title.grid(row=3, column=0, columnspan=2, sticky=W)
+        self.title.grid(row=3, column=0, sticky=W)
+
+        self.skip_button = Button(
+            self, text='跳過', command=self.skip, width=15)
+        self.skip_button.grid(row=3, column=1)
 
         self.hint_button = Button(
             self, text='提示', command=self.hint, width=15)
-        self.hint_button.grid(row=2, column=1)
+        self.hint_button.grid(row=3, column=2)
 
         self.reset_button = Button(
             self, text='重設', command=self.reset, width=15)
-        self.reset_button.grid(row=3, column=1)
+        self.reset_button.grid(row=3, column=3)
 
         self.snippet.insert(END, self.quiz.init_text)
 
@@ -128,6 +133,12 @@ class Window(Frame):  # noqa: D101
             else:
                 del self.quizzes[0]
                 self.gen_quiz()
+
+    def skip(self):
+        """Skip to next quiz."""
+        quiz = self.quizzes.pop(0)
+        self.quizzes.insert(len(self.quizzes), quiz)
+        self.gen_quiz()
 
     def reset(self):
         """Reset initial text."""
