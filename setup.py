@@ -13,7 +13,7 @@ setup(
     long_description='...............',
     install_requires=[],
     package_data={
-        'core': ['data/quiz.json'],
+        'core': ['data/*.json'],
     },
     entry_points={
         'console_scripts': ['ji.py = core.main:run_app']

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import json
 import random
+import os
 from os.path import abspath, dirname, join
 
 from tkinter import (
@@ -45,10 +46,15 @@ class Window(Frame):  # noqa: D101
     def collect_quizzes(self):
         """Dynamically collect class inherited from quiz.Quiz."""
         quizzes = []
-        with open(join(dirname(abspath(__file__)), 'data', 'quiz.json')) as f:
-            data = json.load(f)
-        for class_name, settings in data.items():
-            quizzes.append(type(class_name, (quiz.Quiz, ), settings))
+        data_path = join(dirname(abspath(__file__)), 'data')
+        for _, _, filenames in os.walk(data_path):
+            for filename in filenames:
+                if filename.endswith('.json'):
+                    with open(join(data_path, filename)) as f:
+                        data = json.load(f)
+                    for class_name, settings in data.items():
+                        quizzes.append(
+                            type(class_name, (quiz.Quiz, ), settings))
         random.shuffle(quizzes)
         return quizzes
 
