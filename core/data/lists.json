@@ -9,6 +9,9 @@
     "answer": ["a", "b", "c", "d"],
     "criteria": [
         "self.local['x'] == self.answer"
+    ],
+    "test_code": [
+      "del x[-1]"
     ]
   }
 }

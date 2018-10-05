@@ -9,7 +9,10 @@
     "criteria": [
       "self.local.get('sentence') == self.answer",
       "'.replace' in snippet"
-    ] 
+    ],
+    "test_code": [
+      "sentence = sentence.replace('Pyton', 'Python')"
+    ]
   },
   "CountLetter": {
     "name": "字串計數",
@@ -22,6 +25,9 @@
     "answer": 2,
     "criteria": [
       "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = sentence.count('87')"
     ]
   },
   "StripString": {
@@ -34,6 +40,9 @@
     "answer": "有些人喜歡，有些人不喜歡，因為他有一種哈味",
     "criteria": [
       "self.local.get('sentence') == self.answer"
+    ],
+    "test_code": [
+      "sentence = sentence.strip()"
     ]
   }
 }
