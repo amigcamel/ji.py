@@ -38,7 +38,7 @@ class Window(Frame):
         self.quiz = self.quizzes[0]()
         self.snippet.delete('1.0', END)
         self.snippet.insert(END, self.quiz.init_text)
-        self.title['text'] = f'已完成練習題數: {self.chanllenge_status}'
+        self.title['text'] = self.chanllenge_status
 
     def collect_quizzes(self):
         quizzes = []
@@ -73,11 +73,11 @@ class Window(Frame):
         edit.add_command(label='這是什麼', command=self.about)
         menu.add_cascade(label='關於', menu=edit)
 
-        self.title = Label(self, text=f'已完成練習題數: {self.chanllenge_status}')
-        self.title.grid(row=0, column=0)
+        self.title = Label(self, text=self.chanllenge_status)
+        self.title.grid(row=0, column=1, columnspan=2, sticky=N+E)
 
         question = Label(self, text=self.quiz.description)
-        question.grid(row=1, column=0)
+        # question.grid(row=1, column=0, sticky=N)
 
         self.snippet = Text(self, 
                             highlightbackground='#D1D0CE')
