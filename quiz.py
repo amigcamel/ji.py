@@ -60,7 +60,7 @@ class FixTypoQuiz(Quiz):
     name = 'Fix typo'
     description = (
         'sentence 裡面有一個錯字"Pyton"，'
-        '請把它修正為"Python"'
+        '請把它取代為"Python"'
     )
     hint = 'str.replace'
 
