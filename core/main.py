@@ -1,7 +1,9 @@
 """Main app settings."""
 # -*- coding: utf-8 -*-
 import inspect
+import json
 import random
+from os.path import abspath, dirname, join
 
 from tkinter import (
     Frame,
@@ -48,6 +50,11 @@ class Window(Frame):  # noqa: D101
                 mro = obj.mro()
                 if mro[1] == quiz.Quiz:
                     quizzes.append(obj)
+        # include quiz.json
+        with open(join(dirname(abspath(__file__)), 'data', 'quiz.json')) as f:
+            data = json.load(f)
+        for class_name, settings in data.items():
+            quizzes.append(type(f'{class_name}Quiz', (quiz.Quiz, ), settings))
         random.shuffle(quizzes)
         return quizzes
 

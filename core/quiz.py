@@ -1,7 +1,7 @@
 """Quizzes."""
 # -*- coding: utf-8 -*-
 import abc
-from typing import Tuple
+from typing import Tuple, List
 
 
 class Quiz(abc.ABC):
@@ -41,6 +41,12 @@ class Quiz(abc.ABC):
         raise NotImplemented
 
     @property
+    @abc.abstractproperty
+    def criteria(self) -> List[bool]:
+        """Quiz criteria."""
+        raise NotImplemented
+
+    @property
     def init_text(self):
         """Initial text displayed on window."""
         return '\n'.join(
@@ -49,11 +55,6 @@ class Quiz(abc.ABC):
             in self.local.items()
         )
 
-    @abc.abstractmethod
-    def judge(self):
-        """Judging principles for quiz."""
-        raise NotImplemented
-
     def __call__(self, snippet: str) -> Tuple[int, str]:
         """Run snippet."""
         snippet = snippet.strip('\r\n ')
@@ -61,10 +62,10 @@ class Quiz(abc.ABC):
             return (-2, 'Input is empty')
         try:
             exec(snippet, {}, self.local)
-            if self.judge(snippet):
-                return (1, 'Correct answer')
-            else:
-                return (0, 'Wrong approach or answer')
+            for c in self.criteria:
+                if not eval(c):
+                    return (0, 'Wrong approach or answer')
+            return (1, 'Correct answer')
         except Exception as err:
             return (-1, err)
 
@@ -83,15 +84,10 @@ class FixTypoQuiz(Quiz):  # noqa: D101
     }
 
     answer = 'I love Python'
-
-    def judge(self, snippet) -> bool:  # noqa: D102
-        for j in (
-            self.local['sentence'] == self.answer,
-            '.replace' in snippet,
-        ):
-            if not j:
-                return False
-        return True
+    criteria = (
+        "self.local['sentence'] == self.answer",
+        "'.replace' in snippet",
+    )
 
 
 class DelListElementQuiz(Quiz):  # noqa: D101
@@ -101,11 +97,6 @@ class DelListElementQuiz(Quiz):  # noqa: D101
     hint = 'del'
     presets = {'x': ['a', 'b', 'c', 'd', 'x']}
     answer = ['a', 'b', 'c', 'd']
-
-    def judge(self, snippet) -> bool:  # noqa: D102
-        for j in (
-            self.local['x'] == self.answer,
-        ):
-            if not j:
-                return False
-        return True
+    criteria = (
+        "self.local['x'] == self.answer",
+    )
