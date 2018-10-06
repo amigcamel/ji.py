@@ -1,1 +1,18 @@
-{}
+{
+  "InvertBoolean": {
+    "name": "布林轉換",
+    "description": "將 x 轉換成 False",
+    "presets": {
+      "x": true,
+      "ans": null
+    },
+    "hint": "not",
+    "answer": false,
+    "criteria": [
+      "self.local.get('ans') == False"
+    ],
+    "test_code": [
+      "ans = not x"
+    ]
+  }
+}

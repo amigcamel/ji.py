@@ -1,1 +1,18 @@
-{}
+{
+  "DedupeList": {
+    "name": "轉換集合",
+    "description": "將 sentence 轉換成集合",
+    "presets": {
+      "sentence": ["I", "saw", "a", "saw", "saw", "a", "saw"],
+      "ans": null
+    },
+    "hint": "set",
+    "answer": ["I", "a", "saw"],
+    "criteria": [
+      "self.local.get('ans') == set(self.answer)"
+    ],
+    "test_code": [
+      "ans = set(sentence)"
+    ]
+  }
+}
