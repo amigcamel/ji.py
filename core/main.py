@@ -1,5 +1,6 @@
 """Main app settings."""
 # -*- coding: utf-8 -*-
+from itertools import chain
 from tkinter import (
     Frame,
     Tk,
@@ -11,6 +12,8 @@ from tkinter import (
     messagebox,
     END,
     N, S, W, E,
+    StringVar,
+    OptionMenu,
 )
 
 from . import quiz
@@ -22,7 +25,7 @@ class Window(Frame):  # noqa: D101
         Frame.__init__(self, master)
         self.master = master
 
-        self.quizzes = quiz.collect_quizzes()
+        self.quizzes = list(chain.from_iterable(quiz.QUIZ_DICT.values()))
         self.total_quiz_num = len(self.quizzes)
         self.quiz = self.quizzes[0]()
         self.init_window()
@@ -48,8 +51,6 @@ class Window(Frame):  # noqa: D101
         """Initalize window."""
         self.master.title('吉.py')
         self.pack(fill=BOTH, expand=1, padx=10, pady=10)
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_columnconfigure(0, weight=1)
 
         # menu
         menu = Menu(self.master)
@@ -63,38 +64,58 @@ class Window(Frame):  # noqa: D101
         edit.add_command(label='這是什麼', command=self.about)
         menu.add_cascade(label='關於', menu=edit)
 
+        quiz_type_label = Label(self, text='題目類型', font=('Helvetica', 14))
+        quiz_type_label.grid(row=0, column=0, sticky=W)
+
+        option_list = ['全部'] + list(quiz.QUIZ_DICT.keys())
+        self.drop_var = StringVar()
+        self.drop_var.set(option_list[0])  # default choice
+        self.drop_menu = OptionMenu(
+            self, self.drop_var, *option_list, command=self.select_quiz_type)
+        self.drop_menu.configure(width=15)
+        self.drop_menu.grid(row=0, column=1, sticky=W)
+
         self.question = Label(
             self, text=self.quiz.description, font=('Helvetica', 14, 'bold'))
         self.question.grid(
-            row=1, column=0, columnspan=4, sticky=N + W, pady=10)
+            row=2, column=0, columnspan=4, sticky=N + W, pady=10)
 
         self.snippet = Text(
             self,
             highlightbackground='#D1D0CE',
             font=('Courier New', 14),
         )
-        self.snippet.grid(row=0, column=0, columnspan=4, sticky=N + S + W + E)
+        self.snippet.grid(row=1, column=0, columnspan=4, sticky=N + S + W + E)
 
         self.submit_button = Button(self, text='送出', command=self.submit)
-        self.submit_button.grid(row=2, column=0, columnspan=4, sticky=W + E)
+        self.submit_button.grid(row=3, column=0, columnspan=4, sticky=W + E)
 
         self.title = Label(
             self, text=self.chanllenge_status, font=('Helvetica', 10))
-        self.title.grid(row=3, column=0, sticky=W)
+        self.title.grid(row=4, column=0, sticky=W)
 
         self.skip_button = Button(
             self, text='跳過', command=self.skip, width=15)
-        self.skip_button.grid(row=3, column=1)
+        self.skip_button.grid(row=4, column=1)
 
         self.hint_button = Button(
             self, text='提示', command=self.hint, width=15)
-        self.hint_button.grid(row=3, column=2)
+        self.hint_button.grid(row=4, column=2)
 
         self.reset_button = Button(
             self, text='重設', command=self.reset, width=15)
-        self.reset_button.grid(row=3, column=3)
+        self.reset_button.grid(row=4, column=3)
 
         self.snippet.insert(END, self.quiz.init_text)
+
+    def select_quiz_type(self, value):
+        """Select quiz type."""
+        if value == '全部':
+            self.quizzes = list(chain.from_iterable(quiz.QUIZ_DICT.values()))
+        else:
+            self.quizzes = quiz.QUIZ_DICT[value]
+        self.total_quiz_num = len(self.quizzes)
+        self.gen_quiz()
 
     def submit(self):
         """Submite snippet."""
