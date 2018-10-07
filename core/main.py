@@ -151,9 +151,16 @@ def run_app():
     position_down = int(root.winfo_screenheight() / 2 - window_height / 2)
 
     # Positions the window in the center of the page.
-    root.geometry("+{}+{}".format(position_right, position_down))
-    root.minsize(600, 500)
+    root.geometry(f'+{position_right}+{position_down}')
     Window(root)
+
+    def _adjust_size():
+        w = root.winfo_width() + 10
+        h = root.winfo_height() + 10
+        root.minsize(w, h)
+        root.geometry(f'{w}x{h}')
+    root.after(500, _adjust_size)
+    root.resizable(False, False)
     root.mainloop()
 
 
