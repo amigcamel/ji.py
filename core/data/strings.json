@@ -3,16 +3,17 @@
     "name": "字串取代",
     "description": "sentence 裡面有一個錯字 Pyton，請把它取代為 Python",
     "presets": {
-      "sentence": "I love Pyton"
+      "sentence": "I love Pyton",
+      "ans": null
     },
     "hint": "str.replace",
     "answer": "I love Python",
     "criteria": [
-      "self.local.get('sentence') == self.answer",
+      "self.local.get('ans') == self.answer",
       "'.replace' in snippet"
     ],
     "test_code": [
-      "sentence = sentence.replace('Pyton', 'Python')"
+      "ans = sentence.replace('Pyton', 'Python')"
     ]
   },
   "CountLetter": {
@@ -93,6 +94,151 @@
     ],
     "test_code": [
       "ans = len(sentence)"
+    ]
+  },
+  "CapitalizeString": {
+    "name": "首字大寫",
+    "description": "將 name 首字大寫",
+    "presets": {
+      "name": "owen",
+      "ans": null
+    },
+    "hint": "str.capitalize",
+    "answer": "Owen",
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = name.capitalize()"
+    ]
+  },
+  "UpperString": {
+    "name": "大寫轉換",
+    "description": "將 place 轉換成大寫",
+    "presets": {
+      "place": "taiwan",
+      "ans": null
+    },
+    "hint": "str.upper",
+    "answer": "TAIWAN",
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = place.upper()"
+    ]
+  },
+  "LowerString": {
+    "name": "小寫轉換",
+    "description": "將 subject 轉換成小寫",
+    "presets": {
+      "subject": "LINGUISTICS",
+      "ans": null
+    },
+    "hint": "str.lower",
+    "answer": "linguistics",
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = subject.lower()"
+    ]
+  },
+  "TitleString": {
+    "name": "字首大寫",
+    "description": "將 sentence 的每個字的首字轉換成大寫",
+    "presets": {
+      "sentence": "graduate institute of linguistics",
+      "ans": null
+    },
+    "hint": "str.title",
+    "answer": "Graduate Institute Of Linguistics",
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = sentence.title()"
+    ]
+  },
+  "ContainString": {
+    "name": "包含字串",
+    "description": "檢查 sentence 是否包含「官網」該詞",
+    "presets": {
+      "sentence": "鋼彈盼望傍晚上南港展覽館官方網站觀看萬丈亮燦光芒綻放",
+      "target": "官網",
+      "ans": null
+    },
+    "hint": "in",
+    "answer": false,
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = target in sentence"
+    ]
+  },
+  "StartswithString": {
+    "name": "字串開頭",
+    "description": "檢查 sentence 是否為 「你爸」開頭",
+    "presets": {
+      "sentence": "你爸你背後，他非常火",
+      "ans": null
+    },
+    "hint": "str.startswith",
+    "answer": true,
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = sentence.startswith('你爸')"
+    ]
+  },
+  "EndswithString": {
+    "name": "字串結尾",
+    "description": "檢查 filename 之副檔名是否為 .jpg",
+    "presets": {
+      "filename": "怕.jpg",
+      "ans": null
+    },
+    "hint": "str.endswith",
+    "answer": true,
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = filename.endswith('.jpg')"
+    ]
+  },
+  "SplitString": {
+    "name": "字串分割",
+    "description": "將 sentence 依逗點分割並輸出成 list",
+    "presets": {
+      "sentence": "下雨天,留客天,天留,我不留",
+      "ans": null
+    },
+    "hint": "str.split",
+    "answer": ["下雨天", "留客天", "天留", "我不留"],
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = sentence.split(',')"
+    ]
+  },
+  "JoinString": {
+    "name": "合併字串",
+    "description": "將 tokens 合併為一個字串",
+    "presets": {
+      "tokens": ["喜歡", "你", "溫暖", "的", "文字", "洋溢", "著", "滿滿", "的", "幸福"],
+      "ans": null 
+    },
+    "hint": "str.join",
+    "answer": "喜歡你溫暖的文字洋溢著滿滿的幸福",
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = ''.join(tokens)"
     ]
   }
 }
