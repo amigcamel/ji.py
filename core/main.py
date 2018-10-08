@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from itertools import chain
 from os.path import isfile, join, expanduser
+import webbrowser
 import random
 import json
 
@@ -88,6 +89,9 @@ class Window(Frame):  # noqa: D101
 
         edit = Menu(menu, tearoff=0)
         edit.add_command(label='這是什麼', command=self.about)
+        url = 'https://github.com/amigcamel/ji.py'
+        edit.add_command(
+            label='前往專案', command=lambda: webbrowser.open(url))
         menu.add_cascade(label='關於', menu=edit)
 
         quiz_type_label = Label(self, text='題目類型', font=('Helvetica', 14))
@@ -222,7 +226,9 @@ class Window(Frame):  # noqa: D101
 
     def about(self):
         """Show about info."""
-        messagebox.showinfo('阿吉關心您', '只要有心，人人都是py神')
+        title = '關於'
+        message = '吉.py 是一個幫助學習Python的小工具'
+        messagebox.showinfo(title, message)
 
 
 def run_app():
