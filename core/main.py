@@ -1,6 +1,9 @@
 """Main app settings."""
 # -*- coding: utf-8 -*-
 from itertools import chain
+from os.path import isfile, join, expanduser
+import json
+
 from tkinter import (
     Frame,
     Tk,
@@ -18,6 +21,8 @@ from tkinter import (
 
 from . import quiz
 
+CONFIG_PATH = join(expanduser('~'), '.ji.py.json')
+
 
 class Window(Frame):  # noqa: D101
 
@@ -28,6 +33,17 @@ class Window(Frame):  # noqa: D101
         self.quizzes = list(chain.from_iterable(quiz.QUIZ_DICT.values()))
         self.total_quiz_num = len(self.quizzes)
         self.quiz = self.quizzes[0]()
+
+        # handle config file
+        if isfile(CONFIG_PATH):
+            with open(CONFIG_PATH) as f:
+                try:
+                    self.starred_quizzes = set(json.load(f))
+                except Exception:
+                    self.messagebox.warning('設定檔損毀!')
+                    self.starred_quizzes = set()
+        else:
+            self.starred_quizzes = set()
         self.init_window()
 
         # Key bindings
@@ -40,6 +56,13 @@ class Window(Frame):  # noqa: D101
         self.snippet.insert(END, self.quiz.init_text)
         self.title['text'] = self.chanllenge_status
         self.question['text'] = self.quiz.description
+        if self.quiz.__class__.__name__ in self.starred_quizzes:
+            text = '★'
+            fg = '#F5F500'
+        else:
+            text = '☆'
+            fg = '#000000'
+        self.star_label.config(text=text, fg=fg)
 
     @property
     def chanllenge_status(self):
@@ -66,6 +89,15 @@ class Window(Frame):  # noqa: D101
 
         quiz_type_label = Label(self, text='題目類型', font=('Helvetica', 14))
         quiz_type_label.grid(row=0, column=0, sticky=W)
+
+        star_quiz = Label(
+            self, text='收藏       ', font=('Helvetica', 14))
+        star_quiz.grid(row=0, column=2, columnspan=2, sticky=E)
+
+        self.star_label = Label(
+            self, text='☆', font=('Helvetica', 25, 'bold'))
+        self.star_label.grid(row=0, column=3, sticky=E)
+        self.star_label.bind('<Button-1>', self.star_quiz)
 
         option_list = ['全部'] + list(quiz.QUIZ_DICT.keys())
         self.drop_var = StringVar()
@@ -107,6 +139,22 @@ class Window(Frame):  # noqa: D101
         self.reset_button.grid(row=4, column=3)
 
         self.snippet.insert(END, self.quiz.init_text)
+
+    def star_quiz(self, event):
+        """Mark a quiz as an important one."""
+        status = event.widget.cget('text')
+        if status == '★':
+            self.starred_quizzes.remove(self.quiz.__class__.__name__)
+            change_to = '☆'
+            fg = 'black'
+        else:
+            self.starred_quizzes.add(self.quiz.__class__.__name__)
+            change_to = '★'
+            fg = '#F5F500'
+        event.widget.config(text=change_to)
+        event.widget.config(fg=fg)
+        with open(CONFIG_PATH, 'w') as f:
+            json.dump(list(self.starred_quizzes), f)
 
     def select_quiz_type(self, value):
         """Select quiz type."""
