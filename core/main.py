@@ -82,6 +82,7 @@ class Window(Frame):  # noqa: D101
         self.master.config(menu=menu)
 
         file = Menu(menu, tearoff=0)
+        file.add_command(label='清空收藏', command=self.clear_starred_quizzes)
         file.add_command(label='離開', command=self.quit)
         menu.add_cascade(label='檔案', menu=file)
 
@@ -157,6 +158,18 @@ class Window(Frame):  # noqa: D101
         event.widget.config(fg=fg)
         with open(CONFIG_PATH, 'w') as f:
             json.dump(list(self.starred_quizzes), f)
+
+    def clear_starred_quizzes(self):
+        """Clear starred quizzes."""
+        ans = messagebox.askquestion(
+            '確定刪除', '所有收藏將被清空', icon='warning')
+        if ans == 'yes':
+            self.starred_quizzes = set()
+            text = '☆'
+            fg = '#000000'
+            self.star_label.config(text=text, fg=fg)
+            with open(CONFIG_PATH, 'w') as f:
+                json.dump([], f)
 
     def select_quiz_type(self, value):
         """Select quiz type."""
