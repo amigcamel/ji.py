@@ -37,7 +37,11 @@ class Window(Frame):  # noqa: D101
         # handle config file
         if isfile(CONFIG_PATH):
             with open(CONFIG_PATH) as f:
-                self.starred_quizzes = set(json.load(f))
+                try:
+                    self.starred_quizzes = set(json.load(f))
+                except Exception:
+                    self.messagebox.warning('設定檔損毀!')
+                    self.starred_quizzes = set()
         else:
             self.starred_quizzes = set()
         self.init_window()
