@@ -60,10 +60,10 @@ class Window(Frame):  # noqa: D101
         self.title['text'] = self.chanllenge_status
         self.question['text'] = f'{self.quiz.name}: {self.quiz.description}'
         if self.quiz.__class__.__name__ in self.starred_quizzes:
-            text = '★'
-            fg = '#F5F500'
+            text = '♥'
+            fg = 'red'
         else:
-            text = '☆'
+            text = '♡'
             fg = '#000000'
         self.star_label.config(text=text, fg=fg)
 
@@ -102,7 +102,7 @@ class Window(Frame):  # noqa: D101
         star_quiz.grid(row=0, column=2, columnspan=2, sticky=E)
 
         self.star_label = Label(
-            self, text='☆', font=('Helvetica', 25, 'bold'))
+            self, text='♡', font=('Helvetica', 25, 'bold'))
         self.star_label.grid(row=0, column=3, sticky=E)
         self.star_label.bind('<Button-1>', self.star_quiz)
 
@@ -152,14 +152,14 @@ class Window(Frame):  # noqa: D101
     def star_quiz(self, event):
         """Mark a quiz as an important one."""
         status = event.widget.cget('text')
-        if status == '★':
+        if status == '♥':
             self.starred_quizzes.remove(self.quiz.__class__.__name__)
-            change_to = '☆'
+            change_to = '♡'
             fg = 'black'
         else:
             self.starred_quizzes.add(self.quiz.__class__.__name__)
-            change_to = '★'
-            fg = '#F5F500'
+            change_to = '♥'
+            fg = 'red'
         event.widget.config(text=change_to)
         event.widget.config(fg=fg)
         with open(CONFIG_PATH, 'w') as f:
@@ -171,7 +171,7 @@ class Window(Frame):  # noqa: D101
             '確定刪除', '所有收藏將被清空', icon='warning')
         if ans == 'yes':
             self.starred_quizzes = set()
-            text = '☆'
+            text = '♡'
             fg = '#000000'
             self.star_label.config(text=text, fg=fg)
             with open(CONFIG_PATH, 'w') as f:
