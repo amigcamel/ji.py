@@ -36,15 +36,16 @@
     "name": "修剪字串",
     "description": "去除字首字尾多餘的空白",
     "presets": {
-      "sentence": "  有些人喜歡，有些人不喜歡，因為他有一種哈味      "
+      "sentence": "  有些人喜歡，有些人不喜歡，因為他有一種哈味      ",
+      "ans": null
     },
     "hint": "str.strip",
     "answer": "有些人喜歡，有些人不喜歡，因為他有一種哈味",
     "criteria": [
-      "self.local.get('sentence') == self.answer"
+      "self.local.get('ans') == self.answer"
     ],
     "test_code": [
-      "sentence = sentence.strip()"
+      "ans = sentence.strip()"
     ]
   },
   "ConcatenateString": {
