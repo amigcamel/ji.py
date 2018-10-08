@@ -1,1 +1,17 @@
-{}
+{
+  "CreateDict": {
+    "name": "建立字典",
+    "description": "請將下列資料建立成字典: name=阿吉, gender=男",
+    "presets": {
+      "profile": null
+    },
+    "hint": null,
+    "answer": {"name": "阿吉", "gender": "男"},
+    "criteria": [
+      "self.local.get('profile') == self.answer"
+    ],
+    "test_code": [
+      "profile = dict(name='阿吉', gender='男')"
+    ]
+  }
+}

@@ -1,1 +1,18 @@
-{}
+{
+  "RoundFloat": {
+    "name": "四捨五入",
+    "description": "將圓周率四捨五入至小數點第二為",
+    "presets": {
+      "pi": 3.14159,
+      "ans": null
+    },
+    "hint": "round()",
+    "answer": 3.14,
+    "criteria": [
+      "self.local.get('ans') == self.answer"
+    ],
+    "test_code": [
+      "ans = round(3.14159, 2)"
+    ]
+  }
+}
