@@ -58,7 +58,7 @@ class Window(Frame):  # noqa: D101
         self.snippet.delete('1.0', END)
         self.snippet.insert(END, self.quiz.init_text)
         self.title['text'] = self.chanllenge_status
-        self.question['text'] = self.quiz.description
+        self.question['text'] = f'{self.quiz.name}: {self.quiz.description}'
         if self.quiz.__class__.__name__ in self.starred_quizzes:
             text = '★'
             fg = '#F5F500'
@@ -115,7 +115,9 @@ class Window(Frame):  # noqa: D101
         self.drop_menu.grid(row=0, column=1, sticky=W)
 
         self.question = Label(
-            self, text=self.quiz.description, font=('Helvetica', 14, 'bold'))
+            self, text=f'{self.quiz.name}: {self.quiz.description}',
+            font=('Helvetica', 14, 'bold')
+        )
         self.question.grid(
             row=2, column=0, columnspan=4, sticky=N + W, pady=10)
 
