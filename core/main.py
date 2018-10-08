@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from itertools import chain
 from os.path import isfile, join, expanduser
+import random
 import json
 
 from tkinter import (
@@ -31,6 +32,7 @@ class Window(Frame):  # noqa: D101
         self.master = master
 
         self.quizzes = list(chain.from_iterable(quiz.QUIZ_DICT.values()))
+        random.shuffle(self.quizzes)
         self.total_quiz_num = len(self.quizzes)
         self.quiz = self.quizzes[0]()
 
@@ -162,6 +164,7 @@ class Window(Frame):  # noqa: D101
             self.quizzes = list(chain.from_iterable(quiz.QUIZ_DICT.values()))
         else:
             self.quizzes = quiz.QUIZ_DICT[value]
+        random.shuffle(self.quizzes)
         self.total_quiz_num = len(self.quizzes)
         self.gen_quiz()
 
