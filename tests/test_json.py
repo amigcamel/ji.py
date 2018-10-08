@@ -1,9 +1,11 @@
 """Test quizzes in data/*.json."""
+from itertools import chain
+
 import pytest
 
-from core.quiz import collect_quizzes
+from core.quiz import QUIZ_DICT
 
-quizzes = collect_quizzes()
+quizzes = list(chain.from_iterable(QUIZ_DICT.values()))
 
 
 @pytest.mark.parametrize('Q', quizzes)

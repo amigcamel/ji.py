@@ -3,7 +3,6 @@
 import os
 import abc
 import json
-import random
 from typing import Tuple, List
 from os.path import join, dirname, abspath
 
@@ -74,17 +73,22 @@ class Quiz(abc.ABC):
             return (-1, err)
 
 
-def collect_quizzes():
+QUIZ_DICT = {}
+
+
+def _collect_quizzes():
     """Dynamically collect class inherited from Quiz."""
-    quizzes = []
     data_path = join(dirname(abspath(__file__)), 'data')
     for _, _, filenames in os.walk(data_path):
         for filename in filenames:
             if filename.endswith('.json'):
+                quiz_type = filename.replace('.json', '').capitalize()
+                QUIZ_DICT[quiz_type] = []
                 with open(join(data_path, filename)) as f:
                     data = json.load(f)
                 for class_name, settings in data.items():
-                    quizzes.append(
+                    QUIZ_DICT[quiz_type].append(
                         type(class_name, (Quiz, ), settings))
-    random.shuffle(quizzes)
-    return quizzes
+
+
+_collect_quizzes()
