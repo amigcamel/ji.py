@@ -13,5 +13,39 @@
     "test_code": [
       "profile = dict(name='阿吉', gender='男')"
     ]
+  },
+  "PopDictValue": {
+    "name": "刪除並返回值",
+    "description": "請把 profile 的 gender 刪除並返回值",
+    "presets": {
+      "profile": {"name": "阿吉", "gender": "男"},
+      "gender": null
+    },
+    "hint": "dict.pop",
+    "answer": "男",
+    "criteria": [
+      "self.local.get('gender') == self.answer",
+      "self.local.get('profile') == {'name': '阿吉'}",
+      "'.pop' in snippet"
+    ],
+    "test_code": [
+      "gender = profile.pop('gender')"
+    ]
+  },
+  "ListDictKeys": {
+    "name": "返回鍵(key)",
+    "description": "列出 profile 所有keys, 且 type 為 list",
+    "presets": {
+      "profile": {"name": "阿吉", "gender": "男"},
+      "keys": null
+    },
+    "hint": "dict.keys, list()",
+    "answer": ["name", "gender"],
+    "criteria": [
+      "sorted(self.local.get('keys')) == sorted(self.answer)"
+    ],
+    "test_code": [
+      "keys = list(profile.keys())"
+    ]
   }
 }

@@ -29,6 +29,81 @@
     "test_code": [
       "ans = x[1]"
     ]
+  },
+  "AppendList": {
+    "name": "添加元素",
+    "description": "將 Aji 添加到 people 的最後一位",
+    "presets": {
+      "people": ["Shukai", "Sean", "Joy"]
+    },
+    "hint": "list.append",
+    "answer": ["Shukai", "Sean", "Joy", "Aji"],
+    "criteria": [
+      "self.local.get('people') == self.answer"
+    ],
+    "test_code": [
+      "people.append('Aji')"
+    ]
+  },
+  "ExtendList": {
+    "name": "擴增串列",
+    "description": "把 ta 往後合併到 people",
+    "presets": {
+      "people": ["Shukai", "Sean", "Joy"],
+      "ta": ["Rich", "Chihyao"]
+    },
+    "hint": "list.extend",
+    "answer": ["Shukai", "Sean", "Joy", "Rich", "Chihyao"],
+    "criteria": [
+      "self.local.get('people') == self.answer"
+    ],
+    "test_code": [
+      "people.extend(ta)"
+    ]
+  },
+  "InsertList": {
+    "name": "插入元素",
+    "description": "把 Shukai 插入至 people 之第一位",
+    "presets": {
+      "people": ["Sean", "Aji"]
+    },
+    "hint": "list.insert",
+    "answer": ["Shukai", "Sean", "Aji"],
+    "criteria": [
+      "self.local.get('people') == self.answer"
+    ],
+    "test_code": [
+      "people.insert(0, 'Shukai')"
+    ]
+  },
+  "SortList": {
+    "name": "排序串列",
+    "description": "將 people 按照英文字母順序排列(根據元素首個字母)",
+    "presets": {
+      "people": ["Shukai", "Sean", "Aji", "Joy", "Richard", "Chihyao"]
+    },
+    "hint": "list.sort",
+    "answer": ["Aji", "Chihyao", "Joy", "Richard", "Sean", "Shukai"],
+    "criteria": [
+      "self.local.get('people') == self.answer"
+    ],
+    "test_code": [
+      "people.sort()"
+    ]
+  },
+  "ReverseList": {
+    "name": "反轉串列",
+    "description": "將 people 反轉",
+    "presets": {
+      "people": ["Shukai", "Sean", "Aji", "Joy", "Richard", "Chihyao"]
+    },
+    "hint": "list.reverse",
+    "answer": ["Chihyao", "Richard", "Joy", "Aji", "Sean", "Shukai"],
+    "criteria": [
+      "self.local.get('people') == self.answer"
+    ],
+    "test_code": [
+      "people.reverse()"
+    ]
   }
-
 }

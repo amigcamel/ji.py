@@ -182,7 +182,7 @@
     "name": "字串開頭",
     "description": "檢查 sentence 是否為 「你爸」開頭",
     "presets": {
-      "sentence": "你爸你背後，他非常火",
+      "sentence": "你爸在你背後，他非常火",
       "ans": null
     },
     "hint": "str.startswith",
