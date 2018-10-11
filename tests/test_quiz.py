@@ -1,5 +1,5 @@
 """Tests for quiz."""
-from core.quiz import Quiz
+from jipy.quiz import Quiz
 
 import pytest
 

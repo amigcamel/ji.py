@@ -3,7 +3,7 @@ from itertools import chain
 
 import pytest
 
-from core.quiz import QUIZ_DICT
+from jipy.quiz import QUIZ_DICT
 
 quizzes = list(chain.from_iterable(QUIZ_DICT.values()))
 

@@ -26,7 +26,7 @@ Python 3.6+
 
 或是 clone 這份專案後，執行
 
-    $ python -c 'from core.main import run_app; run_app()'
+    $ python -c 'from jipy.main import run_app; run_app()'
 
 
 ## 反安裝
