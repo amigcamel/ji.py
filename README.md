@@ -15,6 +15,10 @@
 
 ![screenshot](./screenshot.png)
 
+## 版本
+
+Python 3.6+ 
+
 ## 安裝 
 
     $ pip install -U ji.py
