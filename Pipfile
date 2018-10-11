@@ -13,6 +13,7 @@ pytest = "*"
 "flake8" = "*"
 "flake8-docstrings" = "*"
 tox = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.7"
