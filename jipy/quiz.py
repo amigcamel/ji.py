@@ -84,7 +84,7 @@ def _collect_quizzes():
             if filename.endswith('.json'):
                 quiz_type = filename.replace('.json', '').capitalize()
                 QUIZ_DICT[quiz_type] = []
-                with open(join(data_path, filename)) as f:
+                with open(join(data_path, filename), encoding='utf-8') as f:
                     data = json.load(f)
                 for class_name, settings in data.items():
                     QUIZ_DICT[quiz_type].append(
