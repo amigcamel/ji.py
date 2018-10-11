@@ -129,7 +129,8 @@ class Window(Frame):  # noqa: D101
         self.snippet.grid(row=1, column=0, columnspan=4, sticky=N + S + W + E)
 
         self.submit_button = Button(self, text='送出', command=self.submit)
-        self.submit_button.grid(row=3, column=0, columnspan=4, sticky=W + E)
+        self.submit_button.grid(
+            row=3, column=0, columnspan=4, pady=10, sticky=W + E)
 
         self.title = Label(
             self, text=self.chanllenge_status, font=('Helvetica', 10))
@@ -237,14 +238,6 @@ def run_app():
     """Run this app."""
     root = Tk()
 
-    window_width = root.winfo_reqwidth()
-    window_height = root.winfo_reqheight()
-
-    position_right = int(root.winfo_screenwidth() / 2 - window_width / 2)
-    position_down = int(root.winfo_screenheight() / 2 - window_height / 2)
-
-    # Positions the window in the center of the page.
-    root.geometry(f'+{position_right}+{position_down}')
     Window(root)
 
     def _adjust_size():
