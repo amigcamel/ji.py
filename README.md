@@ -27,7 +27,7 @@ Python 3.6+
 ## 安裝 
 
     $ pip install -U ji.py
-    $ ji.py
+    $ jipy
 
 或是 clone 這份專案後，執行
 
