@@ -4,17 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pytest = "*"
-"flake8" = "*"
-"flake8-docstrings" = "*"
 
 [dev-packages]
-pytest = "*"
-"flake8" = "*"
-"flake8-docstrings" = "*"
 tox = "*"
 coverage = "*"
 pytest-cov = "*"
+tox-travis = "*"
+python-coveralls = "*"
+"flake8" = "*"
+"flake8-docstrings" = "*"
+pytest = "*"
 
 [requires]
-python_version = "3.7"
