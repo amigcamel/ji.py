@@ -5,6 +5,7 @@ from os.path import isfile, join, expanduser
 import webbrowser
 import random
 import json
+import sys
 
 from tkinter import (
     Frame,
@@ -225,7 +226,7 @@ class Window(Frame):  # noqa: D101
 
     def quit(self):
         """Quit app."""
-        exit()
+        sys.exit()
 
     def about(self):
         """Show about info."""
