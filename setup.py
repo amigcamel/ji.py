@@ -23,6 +23,9 @@ setup(
         'jipy': ['data/*.json'],
     },
     entry_points={
-        'console_scripts': ['ji.py = jipy.main:run_app']
+        'console_scripts': [
+            'ji.py = jipy.main:run_app',
+            'jipy = jipy.main:run_app',
+        ]
     },
 )
