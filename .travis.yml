@@ -5,7 +5,7 @@ python:
 dist: xenial
 sudo: true
 install:
-  - pip install tox-travis flake8 flake8-docstrings pytest pytest-cov python-coveralls
+  - pip install -r requirements/dev.txt 
 script:
   - tox 
 after_success:

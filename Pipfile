@@ -13,5 +13,6 @@ tox-travis = "*"
 "flake8-docstrings" = "*"
 pytest = "*"
 coveralls = "*"
+pytest-xvfb = "*"
 
 [requires]
