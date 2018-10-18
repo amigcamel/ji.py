@@ -6,7 +6,8 @@ CreateDict:
   hint: null
   name: 建立字典
   presets: {profile: null}
-  test_code: ['profile = dict(name=''阿吉'', gender=''男'')']
+  test_code: |
+    profile = dict(name="阿吉", gender="男")
 ListDictKeys:
   answer: [name, gender]
   criteria: 
@@ -17,7 +18,8 @@ ListDictKeys:
   presets:
     keys: null
     profile: {gender: 男, name: 阿吉}
-  test_code: [keys = list(profile.keys())]
+  test_code: |
+    keys = list(profile.keys())
 PopDictValue:
   answer: 男
   criteria: 
@@ -30,4 +32,5 @@ PopDictValue:
   presets:
     gender: null
     profile: {gender: 男, name: 阿吉}
-  test_code: [gender = profile.pop('gender')]
+  test_code: |
+    gender = profile.pop('gender')

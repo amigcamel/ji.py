@@ -48,5 +48,5 @@ def test_valid_quiz(Q):
 @pytest.mark.parametrize('Q', quizzes)
 def test_quiz_criteria(Q):
     """Test if criteria are correct."""
-    status, _ = Q()('\n'.join(Q.test_code))
+    status, _ = Q()(Q.test_code)
     assert status == 1

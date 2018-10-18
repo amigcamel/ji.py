@@ -7,7 +7,8 @@ AppendList:
   name: 添加元素
   presets:
     people: [Shukai, Sean, Joy]
-  test_code: [people.append('Aji')]
+  test_code: |
+    people.append('Aji')
 DelListElement:
   answer: [a, b, c, d]
   criteria:
@@ -17,7 +18,8 @@ DelListElement:
   name: 刪除元素
   presets:
     x: [a, b, c, d, x]
-  test_code: ['del x[-1]']
+  test_code: |
+    del x[-1]
 ExtendList:
   answer: [Shukai, Sean, Joy, Rich, Chihyao]
   criteria:
@@ -28,7 +30,8 @@ ExtendList:
   presets:
     people: [Shukai, Sean, Joy]
     ta: [Rich, Chihyao]
-  test_code: [people.extend(ta)]
+  test_code: |
+    people.extend(ta)
 ExtractElement:
   answer: 大
   criteria:
@@ -39,7 +42,8 @@ ExtractElement:
   presets:
     ans: null
     x: [臺, 大, 語, 言, 所]
-  test_code: ['ans = x[1]']
+  test_code: |
+    ans = x[1]
 InsertList:
   answer: [Shukai, Sean, Aji]
   criteria:
@@ -49,7 +53,8 @@ InsertList:
   name: 插入元素
   presets:
     people: [Sean, Aji]
-  test_code: ['people.insert(0, ''Shukai'')']
+  test_code: |
+    people.insert(0, "Shukai")
 ReverseList:
   answer: [Chihyao, Richard, Joy, Aji, Sean, Shukai]
   criteria:
@@ -59,7 +64,8 @@ ReverseList:
   name: 反轉串列
   presets:
     people: [Shukai, Sean, Aji, Joy, Richard, Chihyao]
-  test_code: [people.reverse()]
+  test_code: |
+    people.reverse()
 SortList:
   answer: [Aji, Chihyao, Joy, Richard, Sean, Shukai]
   criteria:
@@ -69,4 +75,5 @@ SortList:
   name: 排序串列
   presets:
     people: [Shukai, Sean, Aji, Joy, Richard, Chihyao]
-  test_code: [people.sort()]
+  test_code: |
+    people.sort()

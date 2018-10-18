@@ -6,7 +6,8 @@ AbsoluteValue:
   hint: abs()
   name: 絕對值
   presets: {ans: null, x: -1.234}
-  test_code: [ans = abs(x)]
+  test_code: |
+    ans = abs(x)
 NumericOperations:
   answer: 1.0
   criteria:
@@ -15,7 +16,8 @@ NumericOperations:
   hint: null
   name: 數學運算
   presets: {ans: null}
-  test_code: [ans = ((((1 + 2) * 3) - 4) / 5) ** 6]
+  test_code: |
+    ans = ((((1 + 2) * 3) - 4) / 5) ** 6
 Remainder:
   answer: 1
   criteria:
@@ -24,7 +26,8 @@ Remainder:
   hint: '%'
   name: 求餘數
   presets: {ans: null, x: 3, y: 2}
-  test_code: [ans = x % y]
+  test_code: |
+    ans = x % y
 RoundFloat:
   answer: 3.14
   criteria:
@@ -33,7 +36,8 @@ RoundFloat:
   hint: round()
   name: 四捨五入
   presets: {ans: null, pi: 3.14159}
-  test_code: ['ans = round(3.14159, 2)']
+  test_code: |
+    ans = round(3.14159, 2)
 Summation:
   answer: 114
   criteria:
@@ -44,4 +48,5 @@ Summation:
   presets:
     ans: null
     scores: [3, -2, 10, 99, 21, -65, 48]
-  test_code: [ans = sum(scores)]
+  test_code: |
+    ans = sum(scores)

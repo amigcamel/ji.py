@@ -6,4 +6,5 @@ InvertBoolean:
   hint: not
   name: 布林轉換
   presets: {ans: null, x: true}
-  test_code: [ans = not x]
+  test_code: |
+    ans = not x

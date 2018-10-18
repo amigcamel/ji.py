@@ -6,4 +6,5 @@ CreateTuple:
   hint: null
   name: 建立元組
   presets: {ans: null}
-  test_code: ['ans = (None, )']
+  test_code: |
+    ans = (None, )
