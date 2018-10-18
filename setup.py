@@ -18,7 +18,7 @@ setup(
     packages=find_packages(),
     description='吉.py 是一個幫助學習Python的小工具',
     long_description=long_description,
-    install_requires=[],
+    install_requires=['pyyaml==3.13'],
     package_data={
         'jipy': ['data/*.yml'],
     },
