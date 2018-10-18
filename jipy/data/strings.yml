@@ -1,6 +1,7 @@
 CapitalizeString:
   answer: Owen
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 將 name 首字大寫
   hint: str.capitalize
   name: 首字大寫
@@ -8,7 +9,8 @@ CapitalizeString:
   test_code: [ans = name.capitalize()]
 ConcatenateString:
   answer: 臺灣大學語言學研究所
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 將 x 與 y 字串相加
   hint: +
   name: 字串相加
@@ -16,7 +18,8 @@ ConcatenateString:
   test_code: [ans = x + y]
 ContainString:
   answer: false
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 檢查 sentence 是否包含「官網」該詞
   hint: in
   name: 包含字串
@@ -24,7 +27,8 @@ ContainString:
   test_code: [ans = target in sentence]
 CountLetter:
   answer: 8
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 計算 sentence 中出現 "說" 的次數
   hint: str.count
   name: 字串計數
@@ -32,7 +36,8 @@ CountLetter:
   test_code: [ans = sentence.count('說')]
 CountString:
   answer: 98
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 計算 sentence 的字串長度
   hint: len()
   name: 計算字串長度
@@ -40,7 +45,8 @@ CountString:
   test_code: [ans = len(sentence)]
 EndswithString:
   answer: true
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 檢查 filename 之副檔名是否為 .jpg
   hint: str.endswith
   name: 字串結尾
@@ -48,7 +54,9 @@ EndswithString:
   test_code: [ans = filename.endswith('.jpg')]
 FixTypo:
   answer: I love Python
-  criteria: [self.local.get('ans') == self.answer, '''.replace'' in snippet']
+  criteria:
+    - 'self.local.get("ans") == self.answer'
+    - '".replace" in snippet'
   description: sentence 裡面有一個錯字 Pyton，請把它取代為 Python
   hint: str.replace
   name: 字串取代
@@ -56,7 +64,8 @@ FixTypo:
   test_code: ['ans = sentence.replace(''Pyton'', ''Python'')']
 JoinString:
   answer: 喜歡你溫暖的文字洋溢著滿滿的幸福
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 將 tokens 合併為一個字串
   hint: str.join
   name: 合併字串
@@ -66,7 +75,8 @@ JoinString:
   test_code: [ans = ''.join(tokens)]
 LowerString:
   answer: linguistics
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 將 subject 轉換成小寫
   hint: str.lower
   name: 小寫轉換
@@ -74,7 +84,8 @@ LowerString:
   test_code: [ans = subject.lower()]
 RepeatString:
   answer: OMG!OMG!OMG!
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 將 x 重複三次
   hint: '*'
   name: 重複字串
@@ -82,7 +93,8 @@ RepeatString:
   test_code: [ans = x * 3]
 SplitString:
   answer: [下雨天, 留客天, 天留, 我不留]
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 將 sentence 依逗點分割並輸出成 list
   hint: str.split
   name: 字串分割
@@ -90,7 +102,8 @@ SplitString:
   test_code: ['ans = sentence.split('','')']
 StartswithString:
   answer: true
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 檢查 sentence 是否為 「你爸」開頭
   hint: str.startswith
   name: 字串開頭
@@ -98,7 +111,8 @@ StartswithString:
   test_code: [ans = sentence.startswith('你爸')]
 StripString:
   answer: 有些人喜歡，有些人不喜歡，因為他有一種哈味
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 去除字首字尾多餘的空白
   hint: str.strip
   name: 修剪字串
@@ -106,7 +120,8 @@ StripString:
   test_code: [ans = sentence.strip()]
 TitleString:
   answer: Graduate Institute Of Linguistics
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 將 sentence 的每個字的首字轉換成大寫
   hint: str.title
   name: 字首大寫
@@ -114,7 +129,8 @@ TitleString:
   test_code: [ans = sentence.title()]
 UpperString:
   answer: TAIWAN
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 將 place 轉換成大寫
   hint: str.upper
   name: 大寫轉換

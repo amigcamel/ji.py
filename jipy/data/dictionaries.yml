@@ -1,6 +1,7 @@
 CreateDict:
   answer: {gender: 男, name: 阿吉}
-  criteria: [self.local.get('profile') == self.answer]
+  criteria: 
+    - 'self.local.get("profile") == self.answer' 
   description: '請將下列資料建立成字典: name=阿吉, gender=男'
   hint: null
   name: 建立字典
@@ -8,7 +9,8 @@ CreateDict:
   test_code: ['profile = dict(name=''阿吉'', gender=''男'')']
 ListDictKeys:
   answer: [name, gender]
-  criteria: [sorted(self.local.get('keys')) == sorted(self.answer)]
+  criteria: 
+    - 'sorted(self.local.get("keys")) == sorted(self.answer)' 
   description: 列出 profile 所有keys, 且 type 為 list
   hint: dict.keys, list()
   name: 返回鍵(key)
@@ -18,8 +20,10 @@ ListDictKeys:
   test_code: [keys = list(profile.keys())]
 PopDictValue:
   answer: 男
-  criteria: [self.local.get('gender') == self.answer, 'self.local.get(''profile'')
-      == {''name'': ''阿吉''}', '''.pop'' in snippet']
+  criteria: 
+    - 'self.local.get("gender") == self.answer'
+    - 'self.local.get("profile") == {"name": "阿吉"}'
+    - '".pop" in snippet'
   description: 請把 profile 的 gender 刪除並返回值
   hint: dict.pop
   name: 刪除並返回值

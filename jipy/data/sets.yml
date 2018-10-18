@@ -10,7 +10,8 @@ DedupeList:
   test_code: [ans = set(sentence)]
 DifferenceSets:
   answer: !!set {獨角蟲: null, 盔甲鳥: null, 蜻蜻蜓: null, 觸手百合: null, 蚊香蝌蚪: null}
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 找出 大安區 有但是 中山區 沒有的寶可夢
   hint: '-'
   name: 差集
@@ -25,7 +26,8 @@ DifferenceSets:
   test_code: [ans = set(大安區) - set(中山區)]
 IntersectionSets:
   answer: !!set {勾魂眼: null, 向尾喵: null, 壺壺: null, 跳跳豬: null, 凱西: null}
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 找出 大安區 有且 中山區 也有的寶可夢
   hint: '&'
   name: 交集
@@ -40,7 +42,8 @@ IntersectionSets:
   test_code: [ans = set(大安區) & set(中山區)]
 SymmetricDifferenceSet:
   answer: !!set {皮卡丘: null, 獨角蟲: null, 盔甲鳥: null, 蜻蜻蜓: null, 利牙魚: null, 菊石獸: null, 觸手百合: null, 小小象: null, 蚊香蝌蚪: null, 可達鴨: null}
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 找出 大安區 與 中山區 的所有寶可夢，但排除共有的寶可夢
   hint: ^
   name: 互斥
@@ -55,7 +58,8 @@ SymmetricDifferenceSet:
   test_code: [ans = set(大安區) ^ set(中山區)]
 UnionSets:
   answer: !!set {皮卡丘: null, 勾魂眼: null, 蜻蜻蜓: null, 利牙魚: null, 可達鴨: null, 跳跳豬: null, 觸手百合: null, 小小象: null, 蚊香蝌蚪: null, 菊石獸: null, 獨角蟲: null, 盔甲鳥: null, 向尾喵: null, 壺壺: null, 凱西: null}
-  criteria: [self.local.get('ans') == self.answer]
+  criteria:
+    - 'self.local.get("ans") == self.answer'
   description: 找出所有在 大安區 與 中山區 出現的寶可夢
   hint: '|'
   name: 聯集
