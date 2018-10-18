@@ -7,12 +7,11 @@ name = "pypi"
 
 [dev-packages]
 tox = "*"
-coverage = "*"
 pytest-cov = "*"
 tox-travis = "*"
-python-coveralls = "*"
 "flake8" = "*"
 "flake8-docstrings" = "*"
 pytest = "*"
+coveralls = "*"
 
 [requires]
