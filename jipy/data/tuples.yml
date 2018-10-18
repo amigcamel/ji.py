@@ -5,6 +5,7 @@ CreateTuple:
   description: 建立長度為 1 的 tuple, 該元素可為任意資料型別
   hint: null
   name: 建立元組
-  presets: {ans: null}
+  presets:
+    ans: null
   test_code: |
     ans = (None, )

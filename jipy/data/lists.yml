@@ -40,8 +40,8 @@ ExtractElement:
   hint: list[num]
   name: 取出元素
   presets:
-    ans: null
     x: [臺, 大, 語, 言, 所]
+    ans: null
   test_code: |
     ans = x[1]
 InsertList:

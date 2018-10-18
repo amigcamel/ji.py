@@ -5,6 +5,8 @@ InvertBoolean:
   description: 將 x 轉換成 False
   hint: not
   name: 布林轉換
-  presets: {ans: null, x: true}
+  presets:
+    x: true
+    ans: null
   test_code: |
     ans = not x
