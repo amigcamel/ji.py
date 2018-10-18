@@ -45,3 +45,36 @@ Python 3.6+
 Coverage test
 
     coverage report -m
+
+---
+
+## Documentation
+
+All the quizzes are in `YAML` format, and the following is the basic structure.
+
+```yaml
+ClassName:
+  answer:  
+  criteria:
+    - self.local.get('ans') == self.answer
+  description: 
+  hint: 
+  name: 
+  presets:
+    ans: null
+  result_variable: ans 
+  test_code: |
+    ans = None
+```
+
+| Item             | Explaination     | Require  | Default                                  | type        |
+| ---------------- | ---------------- | -------- |----------------------------------------- | ----------- |
+| ClassName        | object class name| ✓        |                                          | string      | 
+| answer           | quiz answer      | ✓        |                                          |             | 
+| criteria         | judging criteria |          | `self.local.get('ans') == self.answer`   | list        | 
+| description      | quiz description | ✓        |                                          | string      | 
+| hint             | quiz hint        | ✓        |                                          | string      | 
+| name             | quiz name        | ✓        |                                          | string      | 
+| presets          | initial variables|          | `ans = None`                             | dict        | 
+| result_variable  | judging variables|          | `ans`                                    | string      | 
+| test_code        | initial variables| ✓        |                                          | string      | 
