@@ -15,6 +15,8 @@ class Quiz(abc.ABC):
     def __init__(self):
         """Copy presets to local variables for the use of exec."""
         self.local = self.presets.copy()
+        if self.result_variable == 'ans':
+            self.local['ans'] = None
 
     def __repr__(self, *args, **kwargs):  # noqa: D105
         return f'<Quiz: {self.name}>'
@@ -32,10 +34,9 @@ class Quiz(abc.ABC):
         raise NotImplemented
 
     @property
-    @abc.abstractproperty
     def presets(self):
         """Initial variables."""
-        raise NotImplemented
+        return {}
 
     @property
     @abc.abstractproperty
@@ -44,10 +45,16 @@ class Quiz(abc.ABC):
         raise NotImplemented
 
     @property
-    @abc.abstractproperty
-    def criteria(self) -> List[bool]:
+    def _criteria(self) -> List[bool]:
         """Quiz criteria."""
-        raise NotImplemented
+        output = [f'self.local.get("{self.result_variable}") == self.answer']
+        output.extend(getattr(self, 'criteria', []))
+        return output
+
+    @property
+    def result_variable(self) -> str:
+        """Result variable."""
+        return 'ans'
 
     @property
     def init_text(self):
@@ -65,7 +72,7 @@ class Quiz(abc.ABC):
             return (-2, 'Input is empty')
         try:
             exec(snippet, {}, self.local)
-            for c in self.criteria:
+            for c in self._criteria:
                 if not eval(c):
                     return (0, 'Wrong approach or answer')
             return (1, 'Correct answer')

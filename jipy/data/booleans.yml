@@ -1,12 +1,9 @@
 InvertBoolean:
   answer: false
-  criteria:
-    - 'self.local.get("ans") == False' 
   description: 將 x 轉換成 False
   hint: not
   name: 布林轉換
   presets:
     x: true
-    ans: null
   test_code: |
     ans = not x
