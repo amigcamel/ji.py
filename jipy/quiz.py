@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import abc
-import json
+import yaml
 from typing import Tuple, List
 from os.path import join, dirname, abspath
 
@@ -81,11 +81,11 @@ def _collect_quizzes():
     data_path = join(dirname(abspath(__file__)), 'data')
     for _, _, filenames in os.walk(data_path):
         for filename in filenames:
-            if filename.endswith('.json'):
-                quiz_type = filename.replace('.json', '').capitalize()
+            if filename.endswith('.yml'):
+                quiz_type = filename.replace('.yml', '').capitalize()
                 QUIZ_DICT[quiz_type] = []
                 with open(join(data_path, filename), encoding='utf-8') as f:
-                    data = json.load(f)
+                    data = yaml.load(f)
                 for class_name, settings in data.items():
                     QUIZ_DICT[quiz_type].append(
                         type(class_name, (Quiz, ), settings))

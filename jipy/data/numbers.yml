@@ -1,0 +1,42 @@
+AbsoluteValue:
+  answer: 1.234
+  criteria: [self.local.get('ans') == self.answer]
+  description: 求 x 之絕對值
+  hint: abs()
+  name: 絕對值
+  presets: {ans: null, x: -1.234}
+  test_code: [ans = abs(x)]
+NumericOperations:
+  answer: 1.0
+  criteria: [self.local.get('ans') == self.answer]
+  description: '計算下列數學式: 1 + 2 總和乘以3, 再減4, 然後再除以5,最後再求得值的6次方'
+  hint: null
+  name: 數學運算
+  presets: {ans: null}
+  test_code: [ans = ((((1 + 2) * 3) - 4) / 5) ** 6]
+Remainder:
+  answer: 1
+  criteria: [self.local.get('ans') == self.answer]
+  description: 計算 x 除以 y 之餘數
+  hint: '%'
+  name: 求餘數
+  presets: {ans: null, x: 3, y: 2}
+  test_code: [ans = x % y]
+RoundFloat:
+  answer: 3.14
+  criteria: [self.local.get('ans') == self.answer]
+  description: 將圓周率四捨五入至小數點第二位
+  hint: round()
+  name: 四捨五入
+  presets: {ans: null, pi: 3.14159}
+  test_code: ['ans = round(3.14159, 2)']
+Summation:
+  answer: 114
+  criteria: [self.local.get('ans') == self.answer]
+  description: 計算 scores 之總和
+  hint: sum
+  name: 計算總和
+  presets:
+    ans: null
+    scores: [3, -2, 10, 99, 21, -65, 48]
+  test_code: [ans = sum(scores)]

@@ -1,0 +1,122 @@
+CapitalizeString:
+  answer: Owen
+  criteria: [self.local.get('ans') == self.answer]
+  description: 將 name 首字大寫
+  hint: str.capitalize
+  name: 首字大寫
+  presets: {ans: null, name: owen}
+  test_code: [ans = name.capitalize()]
+ConcatenateString:
+  answer: 臺灣大學語言學研究所
+  criteria: [self.local.get('ans') == self.answer]
+  description: 將 x 與 y 字串相加
+  hint: +
+  name: 字串相加
+  presets: {ans: null, x: 臺灣大學, y: 語言學研究所}
+  test_code: [ans = x + y]
+ContainString:
+  answer: false
+  criteria: [self.local.get('ans') == self.answer]
+  description: 檢查 sentence 是否包含「官網」該詞
+  hint: in
+  name: 包含字串
+  presets: {ans: null, sentence: 鋼彈盼望傍晚上南港展覽館官方網站觀看萬丈亮燦光芒綻放, target: 官網}
+  test_code: [ans = target in sentence]
+CountLetter:
+  answer: 8
+  criteria: [self.local.get('ans') == self.answer]
+  description: 計算 sentence 中出現 "說" 的次數
+  hint: str.count
+  name: 字串計數
+  presets: {ans: null, sentence: 我跟你說你不要跟別人說你如果跟別人說我就不要跟你說你如果一定要跟別人說你就不要跟別人說是我跟你說叫你不要跟別人說}
+  test_code: [ans = sentence.count('說')]
+CountString:
+  answer: 98
+  criteria: [self.local.get('ans') == self.answer]
+  description: 計算 sentence 的字串長度
+  hint: len()
+  name: 計算字串長度
+  presets: {ans: null, sentence: 紅鯉魚家有頭小綠驢叫李屢屢，綠鯉魚家有頭小紅驢叫呂里里，紅鯉魚說他家的李屢屢要比綠鯉魚家的呂里里綠，綠鯉魚說他家的呂里里要比紅鯉魚家的李屢屢紅，不只是紅鯉魚比綠鯉魚的驢綠，還是綠鯉魚比紅鯉魚的驢紅}
+  test_code: [ans = len(sentence)]
+EndswithString:
+  answer: true
+  criteria: [self.local.get('ans') == self.answer]
+  description: 檢查 filename 之副檔名是否為 .jpg
+  hint: str.endswith
+  name: 字串結尾
+  presets: {ans: null, filename: 怕.jpg}
+  test_code: [ans = filename.endswith('.jpg')]
+FixTypo:
+  answer: I love Python
+  criteria: [self.local.get('ans') == self.answer, '''.replace'' in snippet']
+  description: sentence 裡面有一個錯字 Pyton，請把它取代為 Python
+  hint: str.replace
+  name: 字串取代
+  presets: {ans: null, sentence: I love Pyton}
+  test_code: ['ans = sentence.replace(''Pyton'', ''Python'')']
+JoinString:
+  answer: 喜歡你溫暖的文字洋溢著滿滿的幸福
+  criteria: [self.local.get('ans') == self.answer]
+  description: 將 tokens 合併為一個字串
+  hint: str.join
+  name: 合併字串
+  presets:
+    ans: null
+    tokens: [喜歡, 你, 溫暖, 的, 文字, 洋溢, 著, 滿滿, 的, 幸福]
+  test_code: [ans = ''.join(tokens)]
+LowerString:
+  answer: linguistics
+  criteria: [self.local.get('ans') == self.answer]
+  description: 將 subject 轉換成小寫
+  hint: str.lower
+  name: 小寫轉換
+  presets: {ans: null, subject: LINGUISTICS}
+  test_code: [ans = subject.lower()]
+RepeatString:
+  answer: OMG!OMG!OMG!
+  criteria: [self.local.get('ans') == self.answer]
+  description: 將 x 重複三次
+  hint: '*'
+  name: 重複字串
+  presets: {ans: null, x: OMG!}
+  test_code: [ans = x * 3]
+SplitString:
+  answer: [下雨天, 留客天, 天留, 我不留]
+  criteria: [self.local.get('ans') == self.answer]
+  description: 將 sentence 依逗點分割並輸出成 list
+  hint: str.split
+  name: 字串分割
+  presets: {ans: null, sentence: '下雨天,留客天,天留,我不留'}
+  test_code: ['ans = sentence.split('','')']
+StartswithString:
+  answer: true
+  criteria: [self.local.get('ans') == self.answer]
+  description: 檢查 sentence 是否為 「你爸」開頭
+  hint: str.startswith
+  name: 字串開頭
+  presets: {ans: null, sentence: 你爸在你背後，他非常火}
+  test_code: [ans = sentence.startswith('你爸')]
+StripString:
+  answer: 有些人喜歡，有些人不喜歡，因為他有一種哈味
+  criteria: [self.local.get('ans') == self.answer]
+  description: 去除字首字尾多餘的空白
+  hint: str.strip
+  name: 修剪字串
+  presets: {ans: null, sentence: '  有些人喜歡，有些人不喜歡，因為他有一種哈味      '}
+  test_code: [ans = sentence.strip()]
+TitleString:
+  answer: Graduate Institute Of Linguistics
+  criteria: [self.local.get('ans') == self.answer]
+  description: 將 sentence 的每個字的首字轉換成大寫
+  hint: str.title
+  name: 字首大寫
+  presets: {ans: null, sentence: graduate institute of linguistics}
+  test_code: [ans = sentence.title()]
+UpperString:
+  answer: TAIWAN
+  criteria: [self.local.get('ans') == self.answer]
+  description: 將 place 轉換成大寫
+  hint: str.upper
+  name: 大寫轉換
+  presets: {ans: null, place: taiwan}
+  test_code: [ans = place.upper()]

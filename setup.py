@@ -20,7 +20,7 @@ setup(
     long_description=long_description,
     install_requires=[],
     package_data={
-        'jipy': ['data/*.json'],
+        'jipy': ['data/*.yml'],
     },
     entry_points={
         'console_scripts': [
