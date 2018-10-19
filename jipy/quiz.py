@@ -5,7 +5,9 @@ import abc
 import yaml
 from typing import Tuple, List
 from os.path import join, dirname, abspath
-from multiprocessing import Process, Manager
+from multiprocessing import Manager
+
+from .multiprocessing_extras import PatchedProcess
 
 
 class Quiz(abc.ABC):
@@ -101,21 +103,26 @@ class Quiz(abc.ABC):
             # can be dropped
             snippet = snippet.replace(self.init_text, '')
 
-            p = Process(target=exec, args=(snippet, {}, self.local))
+            p = PatchedProcess(target=exec, args=(snippet, {}, self.local))
             p.start()
             p.join(5)
             if p.is_alive():
                 print('Process took too long, killed.')
-                p.terminate()
-                p.join()
-                p.close()
                 return (-3, 'Timeout')
+            if p.exception:
+                error, traceback = p.exception
+                return (-1, error)
             for c in self._criteria:
                 if not eval(c):
                     return (0, 'Wrong approach or answer')
             return (1, 'Correct answer')
         except Exception as err:
-            return (-1, err)
+            return (-4, err)  # unknown error
+        finally:
+            p.terminate()
+            # TODO: calling `close` leads pytest fail on some tests
+            # p.close()
+            p.join()
 
 
 QUIZ_DICT = {}

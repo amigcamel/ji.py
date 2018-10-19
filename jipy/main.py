@@ -198,6 +198,8 @@ class Window(Frame):  # noqa: D101
             pass
         elif status == -3:
             messagebox.showerror('中止', '程式執行超時')
+        elif status == -4:
+            messagebox.showerror('錯誤', '未知的錯誤')
         elif status == -1:
             messagebox.showerror('語法錯誤', message)
         elif status == 0:

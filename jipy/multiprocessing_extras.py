@@ -1,5 +1,7 @@
 """Implement multiprocessing `set` proxy."""
 from multiprocessing.managers import MakeProxyType
+from multiprocessing import Process, Pipe
+import traceback
 
 
 BaseSetProxy = MakeProxyType('BaseSetProxy', (
@@ -38,3 +40,29 @@ class SetProxy(BaseSetProxy):  # noqa: D101
     def __ixor__(self, value):  # noqa: D105
         self._callmethod('__ixor__', (value,))
         return self
+
+
+class PatchedProcess(Process):
+    """Add feature: handling Child Errors in Parent.
+
+    reference: https://stackoverflow.com/a/33599967/1105489
+    """
+
+    def __init__(self, *args, **kwargs):  # noqa: D107
+        super().__init__(*args, **kwargs)
+        self._pconn, self._cconn = Pipe()
+        self._exception = None
+
+    def run(self):  # noqa: D102
+        try:
+            Process.run(self)
+            self._cconn.send(None)
+        except Exception as e:
+            tb = traceback.format_exc()
+            self._cconn.send((e, tb))
+
+    @property
+    def exception(self):  # noqa: D102
+        if self._pconn.poll():
+            self._exception = self._pconn.recv()
+        return self._exception
