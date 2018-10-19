@@ -63,3 +63,23 @@ UnionSets:
       獨角蟲, 跳跳豬, 盔甲鳥, 盔甲鳥, 跳跳豬, 壺壺, 觸手百合, 蜻蜻蜓, 蜻蜻蜓, 蜻蜻蜓, 蜻蜻蜓, 觸手百合, 觸手百合]
   test_code: |
     ans = set(大安區) | set(中山區)
+AddSet:
+  answer: !!set {柳丁: null, 蘋果: null, 水梨: null, 奇異果: null}
+  description: 在 fruit 中，新增 奇異果 
+  hint: set.add
+  name: 集合增加
+  presets:
+    fruit: !!set {柳丁: null, 蘋果: null, 水梨: null}
+  result_variable: fruit
+  test_code: |
+    fruit.add('奇異果')
+RemoveSet:
+  answer: !!set {柳丁: null, 蘋果: null, 水梨: null, 奇異果: null}
+  description: 在 fruit 中，移除 百香果 
+  hint: set.remove
+  name: 集合增加
+  presets:
+    fruit: !!set {柳丁: null, 蘋果: null, 百香果: null, 水梨: null, 奇異果: null}
+  result_variable: fruit
+  test_code: |
+    fruit.remove('百香果')
