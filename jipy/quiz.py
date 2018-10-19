@@ -26,6 +26,8 @@ class Quiz(abc.ABC):
                 self.local[k] = manager.list(v)
             elif isinstance(v, dict):
                 self.local[k] = manager.dict(v)
+            elif isinstance(v, set):
+                self.local[k] = manager.set(v)
             else:
                 self.local[k] = v
 
@@ -81,6 +83,8 @@ class Quiz(abc.ABC):
             if value.__class__.__name__ == 'ListProxy':
                 value = repr(list(value))
             elif value.__class__.__name__ == 'DictProxy':
+                value = repr(dict(value))
+            elif value.__class__.__name__ == 'SetProxy':
                 value = repr(dict(value))
             else:
                 value = repr(value)
