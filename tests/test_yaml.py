@@ -12,7 +12,7 @@ quizzes = list(chain.from_iterable(QUIZ_DICT.values()))
 
 
 def test_duplicate_keys():
-    """Test if json object contains duplicate keys."""
+    """Test if yaml object contains duplicate keys."""
     def map_constructor(loader, node, deep=False):
         """Walk over the mapping and detect duplicate keys.
 
