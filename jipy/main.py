@@ -58,7 +58,7 @@ class Window(Frame):  # noqa: D101
         """Generate quiz."""
         self.quiz = self.quizzes[0]()
         self.snippet.delete('1.0', END)
-        self.snippet.insert(END, self.quiz.init_text)
+        self.presets_area.insert(END, self.quiz.init_text)
         self.title['text'] = self.chanllenge_status
         self.question['text'] = f'{self.quiz.name}: {self.quiz.description}'
         if self.quiz.__class__.__name__ in self.starred_quizzes:
@@ -121,36 +121,47 @@ class Window(Frame):  # noqa: D101
             font=('Helvetica', 14, 'bold')
         )
         self.question.grid(
-            row=2, column=0, columnspan=4, sticky=N + W, pady=10)
+            row=3, column=0, columnspan=4, sticky=N + W, pady=10)
 
+        # presets textarea
+        self.presets_area = Text(
+            self,
+            highlightbackground='#D1D0CE',
+            font=('Courier New', 14),
+            height=10,
+        )
+        self.presets_area.grid(
+            row=1, column=0, columnspan=4, sticky=N + S + W + E)
+
+        # answer textarea
         self.snippet = Text(
             self,
             highlightbackground='#D1D0CE',
             font=('Courier New', 14),
         )
-        self.snippet.grid(row=1, column=0, columnspan=4, sticky=N + S + W + E)
+        self.snippet.grid(row=2, column=0, columnspan=4, sticky=N + S + W + E)
 
         self.submit_button = Button(self, text='送出', command=self.submit)
         self.submit_button.grid(
-            row=3, column=0, columnspan=4, pady=10, sticky=W + E)
+            row=4, column=0, columnspan=4, pady=10, sticky=W + E)
 
         self.title = Label(
             self, text=self.chanllenge_status, font=('Helvetica', 10))
-        self.title.grid(row=4, column=0, sticky=W)
+        self.title.grid(row=5, column=0, sticky=W)
 
         self.skip_button = Button(
             self, text='跳過', command=self.skip, width=15)
-        self.skip_button.grid(row=4, column=1)
+        self.skip_button.grid(row=5, column=1)
 
         self.hint_button = Button(
             self, text='提示', command=self.hint, width=15)
-        self.hint_button.grid(row=4, column=2)
+        self.hint_button.grid(row=5, column=2)
 
         self.reset_button = Button(
             self, text='重設', command=self.reset, width=15)
-        self.reset_button.grid(row=4, column=3)
+        self.reset_button.grid(row=5, column=3)
 
-        self.snippet.insert(END, self.quiz.init_text)
+        self.presets_area.insert(END, self.quiz.init_text)
 
     def star_quiz(self, event):
         """Mark a quiz as an important one."""
