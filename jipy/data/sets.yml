@@ -74,12 +74,12 @@ AddSet:
   test_code: |
     fruit.add('奇異果')
 RemoveSet:
-  answer: !!set {柳丁: null, 蘋果: null, 水梨: null, 奇異果: null}
-  description: 在 fruit 中，移除 百香果 
+  answer: !!set {籃球: null, 足球: null}
+  description: 在 sports 中，移除 撞球 
   hint: set.remove
-  name: 集合增加
+  name: 集合移除
   presets:
-    fruit: !!set {柳丁: null, 蘋果: null, 百香果: null, 水梨: null, 奇異果: null}
-  result_variable: fruit
+    sports: !!set {籃球: null, 足球: null, 撞球: null}
+  result_variable: sports
   test_code: |
-    fruit.remove('百香果')
+    sports.remove('撞球')
