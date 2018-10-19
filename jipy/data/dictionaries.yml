@@ -19,7 +19,6 @@ ListDictKeys:
 PopDictValue:
   answer: 男
   criteria: 
-    - 'self.local.get("profile") == {"name": "阿吉"}'
     - '".pop" in snippet'
   description: 請把 profile 的 gender 刪除並返回值
   hint: dict.pop

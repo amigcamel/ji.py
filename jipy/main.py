@@ -195,6 +195,8 @@ class Window(Frame):  # noqa: D101
         status, message = self.quiz(snippet)
         if status == -2:
             pass
+        elif status == -3:
+            messagebox.showerror('中止', '程式執行超時')
         elif status == -1:
             messagebox.showerror('語法錯誤', message)
         elif status == 0:
