@@ -1,6 +1,7 @@
 # ji.py
 
-吉.py
+`/dʒi dɑt paɪ/`
+吉打拍
 
 ---
 [![python version](https://img.shields.io/badge/python-3.6%2C3.7-green.svg)]()
@@ -8,7 +9,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/amigcamel/ji.py/badge.svg?branch=master)](https://coveralls.io/github/amigcamel/ji.py?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-吉.py 是一個幫助學習Python的小工具，  
+*吉打拍* 是一個幫助學習Python的小工具，  
 題目按照Python的基本資料型態作為分類，  
 使用者可以將不熟悉的題目收藏（點選右上角愛心圖示），  
 讓日後複習更加方便。

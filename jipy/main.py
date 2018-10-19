@@ -23,6 +23,7 @@ from tkinter import (
 )
 
 from . import quiz
+from .utils import check_latest_version
 
 CONFIG_PATH = join(expanduser('~'), '.ji.py.json')
 
@@ -240,7 +241,6 @@ class Window(Frame):  # noqa: D101
 def run_app():
     """Run this app."""
     root = Tk()
-
     Window(root)
 
     def _adjust_size():
@@ -250,6 +250,16 @@ def run_app():
         root.geometry(f'{w}x{h}')
     root.after(500, _adjust_size)
     root.resizable(False, False)
+
+    def _check_latest_version():
+        latest_version = check_latest_version()
+        if latest_version:
+            messagebox.showinfo(
+                '發現新版',
+                f'吉打拍更新囉({latest_version})，請用 pip 安裝最新版'
+            )
+    root.after(50, _check_latest_version)
+
     root.mainloop()
 
 

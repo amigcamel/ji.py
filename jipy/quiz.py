@@ -33,7 +33,7 @@ class Quiz(abc.ABC):
             self.local['ans'] = None
 
     def __repr__(self, *args, **kwargs):  # noqa: D105
-        return f'<Quiz: {self.name}>'
+        return f'<{self.__class__.__name__}: {self.name}>'
 
     @property
     @abc.abstractproperty
