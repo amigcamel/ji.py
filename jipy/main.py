@@ -20,6 +20,7 @@ from tkinter import (
     N, S, W, E,
     StringVar,
     OptionMenu,
+    NORMAL, DISABLED,
 )
 
 from . import quiz
@@ -53,12 +54,17 @@ class Window(Frame):  # noqa: D101
 
         # Key bindings
         self.bind('<M1-E>', self.quit)
+        self.presets_area.bind(
+            '<1>', lambda event: self.presets_area.focus_set())
 
     def gen_quiz(self):
         """Generate quiz."""
         self.quiz = self.quizzes[0]()
+        self.presets_area.config(state=NORMAL)
+        self.presets_area.delete('1.0', END)
         self.snippet.delete('1.0', END)
         self.presets_area.insert(END, self.quiz.init_text)
+        self.presets_area.config(state=DISABLED)
         self.title['text'] = self.chanllenge_status
         self.question['text'] = f'{self.quiz.name}: {self.quiz.description}'
         if self.quiz.__class__.__name__ in self.starred_quizzes:
@@ -161,7 +167,9 @@ class Window(Frame):  # noqa: D101
             self, text='重設', command=self.reset, width=15)
         self.reset_button.grid(row=5, column=3)
 
+        self.presets_area.config(state=NORMAL)
         self.presets_area.insert(END, self.quiz.init_text)
+        self.presets_area.config(state=DISABLED)
 
     def star_quiz(self, event):
         """Mark a quiz as an important one."""

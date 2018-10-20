@@ -99,10 +99,6 @@ class Quiz(abc.ABC):
         if not snippet:
             return (-2, 'Input is empty')
         try:
-            # TODO: make self.init_text read-only and the "replace hacking"
-            # can be dropped
-            snippet = snippet.replace(self.init_text, '')
-
             p = PatchedProcess(target=exec, args=(snippet, {}, self.local))
             p.start()
             p.join(5)
