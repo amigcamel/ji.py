@@ -35,10 +35,10 @@ def test_reset(monkeypatch):
     window.snippet.insert(END, test_sentence)
     # test is NO
     monkeypatch.setattr(messagebox, 'askquestion', lambda *args, **kw: 'no')
-    assert (window.snippet.get('1.0', END).strip() == test_sentence)
+    assert (test_sentence in window.snippet.get('1.0', END))
     window.reset()
 
     # test if YES
     monkeypatch.setattr(messagebox, 'askquestion', lambda *args, **kw: 'yes')
     window.reset()
-    assert (window.snippet.get('1.0', END).strip() == '')
+    assert (test_sentence not in window.snippet.get('1.0', END))
