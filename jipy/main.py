@@ -271,6 +271,14 @@ def run_app():
     root = Tk()
     Window(root)
 
+    def _adjust_size():
+        w = root.winfo_width()
+        h = root.winfo_height()
+        root.minsize(w, h)
+        root.geometry(f'{w}x{h}')
+    root.after(5000, _adjust_size)
+    root.resizable(False, False)
+
     def _check_latest_version():
         latest_version = check_latest_version()
         if latest_version:
