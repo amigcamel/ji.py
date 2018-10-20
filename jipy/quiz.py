@@ -110,7 +110,7 @@ class Quiz(abc.ABC):
                     return (0, 'Wrong approach or answer')
             return (1, 'Correct answer')
         except Exception as err:
-            return (-4, err)  # unknown error
+            return (-1, err)
         finally:
             p.terminate()
             # TODO: calling `close` leads pytest fail on some tests
