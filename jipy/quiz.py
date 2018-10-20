@@ -33,9 +33,6 @@ class Quiz(abc.ABC):
             else:
                 self.local[k] = v
 
-        if self.result_variable == 'ans':
-            self.local['ans'] = None
-
     def __repr__(self, *args, **kwargs):  # noqa: D105
         return f'<{self.__class__.__name__}: {self.name}>'
 

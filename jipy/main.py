@@ -65,6 +65,10 @@ class Window(Frame):  # noqa: D101
         self.snippet.delete('1.0', END)
         self.presets_area.insert(END, self.quiz.init_text)
         self.presets_area.config(state=DISABLED)
+        # insert result_variable
+        if self.quiz.result_variable == 'ans':
+            self.snippet.insert(END, 'ans = None')
+
         self.title['text'] = self.chanllenge_status
         self.question['text'] = f'{self.quiz.name}: {self.quiz.description}'
         if self.quiz.__class__.__name__ in self.starred_quizzes:
@@ -170,6 +174,9 @@ class Window(Frame):  # noqa: D101
         self.presets_area.config(state=NORMAL)
         self.presets_area.insert(END, self.quiz.init_text)
         self.presets_area.config(state=DISABLED)
+        # insert result_variable
+        if self.quiz.result_variable == 'ans':
+            self.snippet.insert(END, 'ans = None')
 
     def star_quiz(self, event):
         """Mark a quiz as an important one."""
