@@ -138,7 +138,7 @@ class Window(Frame):  # noqa: D101
             self,
             highlightbackground='#D1D0CE',
             font=('Courier New', 14),
-            height=10,
+            height=5,
         )
         self.presets_area.grid(
             row=1, column=0, columnspan=4, sticky=N + S + W + E)
@@ -148,6 +148,7 @@ class Window(Frame):  # noqa: D101
             self,
             highlightbackground='#D1D0CE',
             font=('Courier New', 14),
+            height=10,
         )
         self.snippet.grid(row=2, column=0, columnspan=4, sticky=N + S + W + E)
 
@@ -161,7 +162,7 @@ class Window(Frame):  # noqa: D101
 
         self.skip_button = Button(
             self, text='跳過', command=self.skip, width=15)
-        self.skip_button.grid(row=5, column=1)
+        self.skip_button.grid(row=5, column=1, sticky=E)
 
         self.hint_button = Button(
             self, text='提示', command=self.hint, width=15)
@@ -177,6 +178,15 @@ class Window(Frame):  # noqa: D101
         # insert result_variable
         if self.quiz.result_variable == 'ans':
             self.snippet.insert(END, 'ans = None')
+
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(2, weight=1)
+        self.grid_rowconfigure(3, weight=1)
+        self.grid_rowconfigure(4, weight=1)
+        self.grid_rowconfigure(5, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
 
     def star_quiz(self, event):
         """Mark a quiz as an important one."""
@@ -270,14 +280,6 @@ def run_app():
     """Run this app."""
     root = Tk()
     Window(root)
-
-    def _adjust_size():
-        w = root.winfo_width()
-        h = root.winfo_height()
-        root.minsize(w, h)
-        root.geometry(f'{w}x{h}')
-    root.after(5000, _adjust_size)
-    root.resizable(False, False)
 
     def _check_latest_version():
         latest_version = check_latest_version()
