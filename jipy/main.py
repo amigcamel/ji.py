@@ -56,6 +56,8 @@ class Window(Frame):  # noqa: D101
         self.bind('<M1-E>', self.quit)
         self.presets_area.bind(
             '<1>', lambda event: self.presets_area.focus_set())
+        self.question.bind(
+            '<1>', lambda event: self.question.focus_set())
 
     def gen_quiz(self):
         """Generate quiz."""
@@ -70,7 +72,13 @@ class Window(Frame):  # noqa: D101
             self.snippet.insert(END, 'ans = None')
 
         self.title['text'] = self.chanllenge_status
-        self.question['text'] = f'{self.quiz.name}: {self.quiz.description}'
+
+        self.question.config(state=NORMAL)
+        self.question.delete('1.0', END)
+        text = f'{self.quiz.name}: {self.quiz.description}'
+        self.question.insert('1.0', text)
+        self.question.config(state=DISABLED)
+
         if self.quiz.__class__.__name__ in self.starred_quizzes:
             text = '♥'
             fg = 'red'
@@ -126,10 +134,15 @@ class Window(Frame):  # noqa: D101
         self.drop_menu.configure(width=15)
         self.drop_menu.grid(row=0, column=1, sticky=W)
 
-        self.question = Label(
-            self, text=f'{self.quiz.name}: {self.quiz.description}',
+        # quiz name and description
+        text = f'{self.quiz.name}: {self.quiz.description}'
+        self.question = Text(
+            self, height=1, borderwidth=0, highlightthickness=0,
             font=('Helvetica', 14, 'bold')
         )
+        self.question.insert(1.0, text)
+        self.question.config(state=DISABLED)
+
         self.question.grid(
             row=3, column=0, columnspan=4, sticky=N + W, pady=10)
 
