@@ -124,6 +124,7 @@ class Quiz(abc.ABC):
 
 
 QUIZ_DICT = {}
+QUIZ_DICT_FLAT = {}
 
 
 def _collect_quizzes():
@@ -137,8 +138,9 @@ def _collect_quizzes():
                 with open(join(data_path, filename), encoding='utf-8') as f:
                     data = yaml.load(f)
                 for class_name, settings in data.items():
-                    QUIZ_DICT[quiz_type].append(
-                        type(class_name, (Quiz, ), settings))
+                    Q = type(class_name, (Quiz, ), settings)
+                    QUIZ_DICT[quiz_type].append(Q)
+                    QUIZ_DICT_FLAT[class_name] = Q
 
 
 _collect_quizzes()

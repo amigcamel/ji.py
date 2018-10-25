@@ -126,7 +126,7 @@ class Window(Frame):  # noqa: D101
         self.star_label.grid(row=0, column=3, sticky=E)
         self.star_label.bind('<Button-1>', self.star_quiz)
 
-        option_list = ['全部'] + list(quiz.QUIZ_DICT.keys())
+        option_list = ['全部', '收藏'] + list(quiz.QUIZ_DICT.keys())
         self.drop_var = StringVar()
         self.drop_var.set(option_list[0])  # default choice
         self.drop_menu = OptionMenu(
@@ -234,6 +234,12 @@ class Window(Frame):  # noqa: D101
         """Select quiz type."""
         if value == '全部':
             self.quizzes = list(chain.from_iterable(quiz.QUIZ_DICT.values()))
+        elif value == '收藏':
+            self.quizzes = [
+                quiz.QUIZ_DICT_FLAT[quiz_name]
+                for quiz_name
+                in self.starred_quizzes
+            ]
         else:
             self.quizzes = quiz.QUIZ_DICT[value]
         random.shuffle(self.quizzes)
