@@ -161,7 +161,7 @@ class Window(Frame):  # noqa: D101
             self,
             highlightbackground='#D1D0CE',
             font=('Courier New', 14),
-            height=10,
+            height=8,
         )
         self.snippet.grid(row=2, column=0, columnspan=4, sticky=N + S + W + E)
 
@@ -185,6 +185,7 @@ class Window(Frame):  # noqa: D101
             self, text='重設', command=self.reset, width=15)
         self.reset_button.grid(row=5, column=3)
 
+        # presets text area
         self.presets_area.config(state=NORMAL)
         self.presets_area.insert(END, self.quiz.init_text)
         self.presets_area.config(state=DISABLED)
