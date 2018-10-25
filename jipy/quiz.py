@@ -88,6 +88,11 @@ class Quiz(abc.ABC):
             else:
                 value = repr(value)
             text += f'{key} = {value}\n'
+        if text:
+            intro_text = '# 預設變數\n'
+        else:
+            intro_text = '# 本題無預設變數\n'
+        text = intro_text + text
         return text
 
     def __call__(self, snippet: str) -> Tuple[int, str]:
