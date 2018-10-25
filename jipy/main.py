@@ -129,6 +129,7 @@ class Window(Frame):  # noqa: D101
         option_list = ['全部', '收藏'] + list(quiz.QUIZ_DICT.keys())
         self.drop_var = StringVar()
         self.drop_var.set(option_list[0])  # default choice
+        self._prev_drop_var = self.drop_var.get()
         self.drop_menu = OptionMenu(
             self, self.drop_var, *option_list, command=self.select_quiz_type)
         self.drop_menu.configure(width=15)
@@ -235,6 +236,10 @@ class Window(Frame):  # noqa: D101
         if value == '全部':
             self.quizzes = list(chain.from_iterable(quiz.QUIZ_DICT.values()))
         elif value == '收藏':
+            if not self.starred_quizzes:
+                messagebox.showwarning('提示', '尚無任何收藏')
+                self.drop_var.set(self._prev_drop_var)
+                return
             self.quizzes = [
                 quiz.QUIZ_DICT_FLAT[quiz_name]
                 for quiz_name
@@ -245,6 +250,7 @@ class Window(Frame):  # noqa: D101
         random.shuffle(self.quizzes)
         self.total_quiz_num = len(self.quizzes)
         self.gen_quiz()
+        self._prev_drop_var = self.drop_var.get()
 
     def submit(self):
         """Submite snippet."""
@@ -259,7 +265,7 @@ class Window(Frame):  # noqa: D101
         elif status == -1:
             messagebox.showerror('語法錯誤', message)
         elif status == 0:
-            messagebox.showwarning('', '答案或方法錯誤')
+            messagebox.showinfo('', '答案或方法錯誤')
         elif status == 1:
             messagebox.showinfo('水喔', '好棒棒!')
             if len(self.quizzes) == 1:
