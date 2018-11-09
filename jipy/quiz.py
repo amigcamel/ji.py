@@ -84,7 +84,7 @@ class Quiz(abc.ABC):
             elif value.__class__.__name__ == 'DictProxy':
                 value = repr(dict(value))
             elif value.__class__.__name__ == 'SetProxy':
-                value = repr(dict(value))
+                value = repr(set(value))
             else:
                 value = repr(value)
             text += f'{key} = {value}\n'
